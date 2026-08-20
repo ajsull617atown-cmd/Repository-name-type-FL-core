@@ -1,77 +1,158 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FLG v3.12.9 FIXED</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#fff;font-family:monospace}:root{--red:#ff1515}.top{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;gap:6px;padding:8px;overflow-x:auto;background:#000}.pill{white-space:nowrap;padding:9px 14px;border-radius:999px;border:1px solid #222;background:#0a0a0a;color:#777;font-size:9px;font-weight:900;cursor:pointer}.pill.act{background:#fff;color:#000}.page{display:none;min-height:100vh;padding:76px 12px 100px}.page.on{display:block}.card{background:#0c0c0c;border:1px solid #1e1e1e;border-radius:16px;padding:14px;cursor:pointer;margin:8px 0}.card:hover{border-color:var(--red)}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.bottom{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:60;display:flex;gap:6px;padding:6px;background:rgba(12,12,12,0.95);border:1px solid #333;border-radius:999px}.bbtn{padding:12px 18px;border-radius:999px;border:1px solid #222;background:#0a0a0a;color:#888;font-size:10px;font-weight:900;cursor:pointer}.bbtn.act{background:var(--red);color:#000}.core{width:92vw;max-width:480px;aspect-ratio:1;margin:50px auto 20px;border-radius:50%;background:radial-gradient(at 30% 30%,#ff3a3a,#7a0000 60%,#1a0000);box-shadow:0 0 60px rgba(255,21,21,0.6);display:flex;align-items:center;justify-content:center;font-size:120px;font-weight:900;color:#000}.btn{padding:12px 16px;border-radius:999px;border:1px solid #333;background:#111;color:#fff;font-weight:800;font-size:11px;cursor:pointer;margin:4px}.btn.red{background:var(--red);color:#000;border-color:var(--red)}.search{width:100%;background:#0c0c0c;border:1px solid #1e1e1e;border-radius:12px;padding:14px;color:#fff;margin:10px 0;outline:none}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--red);color:#000;padding:10px 18px;border-radius:999px;font-weight:900;font-size:11px;z-index:999;display:none}.modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:100;display:none;align-items:center;justify-content:center;padding:16px}.modal.on{display:flex}.box{background:#0c0c0c;border:1px solid var(--red);border-radius:16px;padding:20px;max-width:420px;width:100%}.dot{width:8px;height:8px;border-radius:50%;display:inline-block}</style></head><body>
-<div class="top">
-<button class="pill act" data-s="reactor">REACTOR CORE</button>
-<button class="pill" data-s="eco">ECOSYSTEM</button>
-<button class="pill" data-s="db">DATABASE</button>
-<button class="pill" data-s="prov">PROVIDERS</button>
-<button class="pill" data-s="plug">PLUGINS</button>
-<button class="pill" data-s="ai">AI MODELS</button>
-<button class="pill" data-s="market">MARKETPLACE</button>
-<button class="pill" data-s="msg">MESSAGING</button>
-<button class="pill" data-s="sec">SECURITY</button>
-<button class="pill" data-s="front">FRONTEND</button>
-<button class="pill" data-s="back">BACKEND</button>
-<button class="pill" data-s="road">ROADMAP</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLG Reactor - Factory Labs</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'JetBrains Mono',monospace}
+  body{background:#000;color:#fff;overflow-x:hidden;padding-bottom:80px}
+  .top-bar{padding:16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #111}
+  .fl-logo{font-size:42px;color:#3a3a3a;font-weight:900}
+  .factory{color:#888;font-size:14px;letter-spacing:2px}
+  .active{color:#ff1515;font-size:10px;letter-spacing:1.5px}
+  .tabs{display:flex;gap:8px;padding:0 12px 12px}
+  .tab{padding:6px 14px;border-radius:6px;border:1px solid #1a1a1a;font-size:10px;cursor:pointer}
+  .tab.active{background:#ff1515;color:#000;border-color:#ff1515;font-weight:800}
+  .tab.inactive{background:#000;color:#666}
+  .page{display:none}
+  .page.active{display:block}
+  .core-header{padding:20px 16px 0;display:flex;justify-content:space-between}
+  .core-unit{color:#666;font-size:10px;letter-spacing:2px}
+  .reactor-title{font-size:32px;font-weight:800;line-height:1}
+  .build-line{margin-top:8px;display:flex;gap:8px;font-size:11px;flex-wrap:wrap}
+  .build-id{color:#ff1515}
+  .flux-box{text-align:right}
+  .flux-label{color:#666;font-size:8px}
+  .flux-sync{color:#ff1515;font-size:14px;font-weight:800}
+  .online{margin-top:8px;background:#ff1515;color:#000;padding:4px 12px;font-size:11px;font-weight:800;letter-spacing:2px;display:inline-block}
+  .core-wrap{position:relative;height:420px;margin:20px 0;display:flex;align-items:center;justify-content:center}
+  .glow-outer{position:absolute;width:420px;height:420px;background:radial-gradient(circle,rgba(255,21,21,0.25) 0%, transparent 70%);border-radius:50%}
+  .honeycomb{position:absolute;width:380px;height:380px;border:0.5px solid #ff1515;opacity:0.3;border-radius:50%;background:#0a0a0a}
+  .ring-outer{position:absolute;width:260px;height:260px;border:3px solid var(--glow,#ff1515);border-radius:50%;background:#000;box-shadow:0 0 24px var(--glow,#ff1515);transition:all 0.5s}
+  .ring-mid{position:absolute;width:200px;height:200px;border:2px dashed #ff1515;opacity:0.5;border-radius:50%}
+  .ring-inner{position:absolute;width:130px;height:130px;border:2px solid var(--glow,#ff1515);background:#1a0000;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all 0.5s}
+  .core-fl{font-size:54px;font-weight:900;color:var(--glow,#ff1515)}
+  .core-sub{font-size:10px;color:#fff}
+  .core-pct{font-size:10px;color:var(--glow,#ff1515)}
+  .panel{position:absolute;background:#0a0a0a;border:1px solid #330000;padding:10px 12px;min-width:90px}
+  .panel-label{color:#666;font-size:8px;letter-spacing:1px}
+  .panel-val{font-size:18px;font-weight:800}
+  .panel-val.red{color:#ff1515}
+  .panel-val.white{color:#fff}
+  .panel-sub{font-size:8px;color:#444}
+  .p1{top:20px;left:0;border-radius:8px 0 8px 0}
+  .p2{top:80px;right:0;border-radius:0 8px 0 8px}
+  .p3{bottom:40px;left:0;border-radius:8px 0 8px 0}
+  .p4{bottom:0;right:0;border-radius:0 8px 0 8px}
+  .stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 12px 8px}
+  .stat{border:1px solid #151515;background:#0a0a0a;padding:10px 12px;border-radius:4px}
+  .stat-label{color:#666;font-size:8px}
+  .stat-val{color:#fff;font-size:12px;margin-top:2px}
+  .lib-header{display:flex;justify-content:space-between;align-items:center;padding:16px}
+  .lib-title{font-size:18px;font-weight:800}
+  .lib-toggles{display:flex;gap:8px}
+  .toggle{padding:6px 16px;border-radius:16px;font-size:11px;font-weight:800;cursor:pointer}
+  .toggle.grid{background:#fff;color:#000}
+  .toggle.compact{background:#111;color:#888;border:1px solid #222}
+  .search{margin:0 16px 12px;background:#0a0a0a;border:1px solid #222;border-radius:20px;padding:10px 16px;display:flex;gap:8px;align-items:center}
+  .search input{background:transparent;border:none;outline:none;color:#fff;font-size:11px;width:100%;letter-spacing:1px}
+  .grid-lib{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 8px}
+  .card{background:#0a0a0a;border:1px solid #151515;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform 0.1s}
+  .card:active{transform:scale(0.97)}
+  .card-top{height:6px}
+  .card-body{padding:12px 12px 0;display:flex;gap:10px}
+  .card-icon{width:64px;height:64px;background:#111;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:32px}
+  .badge{border:1px solid var(--glow);padding:2px 8px;border-radius:10px;font-size:9px;font-weight:800;color:var(--glow);background:#1a1a1a;display:inline-block}
+  .fps{color:#666;font-size:10px;margin-top:4px}
+  .card-title{padding:10px 12px 0;font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .card-pkg{padding:2px 12px 0;font-size:9px;color:#555}
+  .card-foot{padding:10px;display:flex;justify-content:space-between;align-items:center}
+  .open-btn{background:#fff;color:#000;padding:6px 16px;border-radius:16px 0 16px 0;font-size:11px;font-weight:800;cursor:pointer}
+  .arrow{width:28px;height:28px;border:1px solid var(--glow);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--glow);font-size:12px}
+  .card-glow{height:2px;opacity:0.6;margin:0 12px}
+  .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#000;padding:8px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;border-top:1px solid #111;z-index:10}
+  .nav-btn{background:#0a0a0a;border:1px solid #222;border-radius:20px;padding:10px;text-align:center;cursor:pointer}
+  .nav-btn.active{background:#fff;border-color:#fff}
+  .nav-btn.active .nav-t{color:#000;font-weight:800}
+  .nav-btn.active .nav-s{color:#000}
+  .nav-btn.reactor.active{background:#ff1515;border-color:#ff1515}
+  .nav-t{font-size:11px;color:#888;letter-spacing:1px}
+  .nav-s{font-size:8px;color:#555;margin-top:2px}
+  .hint{text-align:center;color:#888;font-size:9px;letter-spacing:1px;padding:8px 0 76px}
+</style>
+</head>
+<body>
+<div class="top-bar"><div class="fl-logo">FL</div><div><div class="factory">FACTORY LABS</div><div class="active" id="headerActive">PATH OF EXILE • ACTIVE...</div></div></div>
+<div class="tabs"><div class="tab active" onclick="switchTab('reactor')">REACTOR</div><div class="tab inactive">ECOSYSTEM</div><div class="tab inactive">DATABASE</div></div>
+<div id="reactorPage" class="page active">
+  <div class="core-header"><div><div class="core-unit">CORE UNIT // 01</div><div class="reactor-title">REACTOR</div><div class="reactor-title">CORE</div><div class="build-line"><span style="color:#666">BUILD:</span> <span class="build-id" id="buildLabel">NEUTRAL-01</span> <span style="color:#888">• TRANSFORM ACTIVE</span></div></div><div class="flux-box"><div class="flux-label">FLUX CAPACITOR</div><div class="flux-sync">98.4% SYNC</div><div class="online">ONLINE</div></div></div>
+  <div class="core-wrap"><div class="glow-outer"></div><div class="honeycomb"></div><div class="ring-outer" id="ringOuter"></div><div class="ring-mid"></div><div class="ring-inner" id="ringInner"><div class="core-fl" id="coreText">FL</div><div class="core-sub">CORE</div><div class="core-pct" id="corePct">164% ACTIVE</div></div><div class="panel p1"><div class="panel-label">CORE TEMP</div><div class="panel-val red">54°C</div><div class="panel-sub">NOMINAL</div></div><div class="panel p2"><div class="panel-label">CPU LOAD</div><div class="panel-val white" id="cpuVal">68%</div><div style="height:4px;background:#222;margin-top:4px;border-radius:2px"><div id="cpuBar" style="height:100%;width:68%;background:#ff1515"></div></div></div><div class="panel p3"><div class="panel-label">FLUX</div><div class="panel-val white">STABLE</div><div style="color:#ff1515">▐▐▐▌</div></div><div class="panel p4"><div class="panel-label">BUILD</div><div class="panel-val red" id="buildCardLabel" style="font-size:11px">NEUTRAL-01</div><div class="panel-sub" style="margin-top:2px">CLICK LIBRARY TO TRANSFORM</div></div></div>
+  <div class="stats-row"><div class="stat"><div class="stat-label">POWER DRAW</div><div class="stat-val">2.4 kW</div></div><div class="stat"><div class="stat-label">MEM USAGE</div><div class="stat-val">12.8 / 32</div></div><div class="stat"><div class="stat-label">NET LATENCY</div><div class="stat-val">14 ms</div></div></div>
+  <div class="hint">TAP LIBRARY • PICK BUILD TO TRANSFORM CORE</div>
 </div>
-<div id="reactor" class="page on"><div class="core" id="core">FL</div><div style="text-align:center;letter-spacing:0.3em;font-weight:900">FACTORY LINE<br><span style="color:var(--red)">GAMING</span><div style="font-size:8px;color:#666;margin-top:6px">FLG • ADVANCED REACTOR CORE • SECURE CORE v3.12.9</div><div id="tLabel" style="color:var(--red);font-size:10px;margin-top:8px"></div></div><div style="text-align:center;margin-top:20px"><button class="btn red" onclick="showPage('library')">OPEN LIBRARY →</button><button class="btn" onclick="showPage('eco')">ECOSYSTEM →</button><button class="btn" onclick="showPage('market')">MARKETPLACE →</button></div><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:20px"><div class="card" onclick="showPage('library')"><b>📚 Library 312</b><div style="font-size:9px;color:var(--red)">TAP → LIBRARY</div></div><div class="card" onclick="showPage('front')"><b>⚙️ Settings FIXED</b><div style="font-size:9px">Tap opens Backend</div><div style="margin-top:8px"><button class="btn red" onclick="event.stopPropagation();showPage('back')">OPEN BACKEND →</button><button class="btn" onclick="event.stopPropagation();showPage('reactor')">REACTOR →</button></div></div></div></div>
-<div id="eco" class="page"><h2 style="color:var(--red)">ECOSYSTEM</h2><button class="btn red" onclick="showPage('reactor')">← REACTOR</button><div id="ecoCards" style="margin-top:12px"></div></div>
-<div id="db" class="page"><h2 style="color:var(--red)">DATABASE</h2><button class="btn red" onclick="showPage('prov')">NEXT → PROVIDERS</button><div class="card" onclick="toast('copied → PROVIDERS');setTimeout(()=>showPage('prov'),600)"><b>users / games / ai_models</b><div style="font-size:9px;color:var(--red)">TAP → PROVIDERS</div></div></div>
-<div id="prov" class="page"><h2 style="color:var(--red)">PROVIDERS</h2><button class="btn red" onclick="showPage('plug')">NEXT → PLUGINS</button><div id="provCards" style="margin-top:12px"></div></div>
-<div id="plug" class="page"><h2 style="color:var(--red)">PLUGINS</h2><button class="btn red" onclick="showPage('ai')">NEXT → AI</button><div id="plugCards" style="margin-top:12px"></div></div>
-<div id="ai" class="page"><h2 style="color:var(--red)">AI MODELS</h2><button class="btn red" onclick="showPage('market')">NEXT → MARKETPLACE</button><div id="aiCards" style="margin-top:12px"></div></div>
-<div id="market" class="page"><h2 style="color:var(--red)">MARKETPLACE</h2><button class="btn red" onclick="showPage('library')">OPEN LIBRARY →</button><div id="marketCards" class="grid2" style="margin-top:12px"></div></div>
-<div id="msg" class="page"><h2 style="color:var(--red)">MESSAGING</h2><button class="btn red" onclick="showPage('sec')">NEXT → SECURITY</button><div id="msgCards" style="margin-top:12px"></div></div>
-<div id="sec" class="page"><h2 style="color:var(--red)">SECURITY</h2><button class="btn red" onclick="showPage('front')">NEXT → FRONTEND</button><div id="secCards" style="margin-top:12px"></div></div>
-<div id="front" class="page"><h2 style="color:var(--red)">FRONTEND — SETTINGS FIXED</h2><button class="btn red" onclick="showPage('back')">NEXT → BACKEND</button><div class="card" onclick="showPage('back')" style="margin-top:12px;border:1px solid var(--red)"><b>⚙️ Settings — FIXED</b><div style="font-size:11px;margin-top:6px;line-height:1.5">Settings module<br>Click to open Settings</div><div style="margin-top:12px;display:flex;gap:6px"><button class="btn red" onclick="event.stopPropagation();showPage('back')">OPEN BACKEND →</button><button class="btn" onclick="event.stopPropagation();showPage('reactor')">REACTOR →</button><button class="btn" onclick="event.stopPropagation();showPage('library')">LIBRARY →</button></div></div><div id="frontCards" style="margin-top:12px"></div></div>
-<div id="back" class="page"><h2 style="color:var(--red)">BACKEND</h2><button class="btn red" onclick="showPage('road')">NEXT → ROADMAP</button><div id="backCards" style="margin-top:12px"></div></div>
-<div id="road" class="page"><h2 style="color:var(--red)">ROADMAP</h2><button class="btn red" onclick="showPage('reactor')">← REACTOR</button><div id="roadCards" style="margin-top:12px"></div></div>
-<div id="library" class="page"><h2 style="color:var(--red)">LIBRARY • 312</h2><input id="search" class="search" placeholder="SEARCH 312..."><div style="display:flex;gap:8px"><button class="pill act" id="bGrid">⊞ GRID</button><button class="pill" id="bCompact">☰ COMPACT</button></div><div id="libGrid" class="grid2" style="margin-top:10px"></div></div>
-<div id="builds" class="page"><h2 style="color:var(--red)">BUILDS</h2><div id="buildCards" style="margin-top:12px"></div></div>
-<div class="bottom"><button class="bbtn act" data-p="reactor">REACTOR</button><button class="bbtn" data-p="library">LIBRARY</button><button class="bbtn" data-p="builds">BUILDS</button></div>
-<div class="toast" id="toast"></div>
-<div class="modal" id="modal" onclick="this.classList.remove('on')"><div class="box" onclick="event.stopPropagation()"><h3 id="mTitle" style="color:var(--red)"></h3><div id="mBody" style="font-size:11px;margin-top:10px;line-height:1.6"></div><div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap"><button class="btn red" onclick="document.getElementById('modal').classList.remove('on')">CLOSE</button><button class="btn" id="mNext">NEXT →</button><button class="btn" id="mOpen">OPEN APP ↗</button><button class="btn" id="mCopy">COPY</button></div></div></div>
+<div id="libraryPage" class="page">
+  <div class="lib-header"><div class="lib-title">LIBRARY • 312</div><div class="lib-toggles"><div class="toggle grid">GRID</div><div class="toggle compact">COMPACT</div></div></div>
+  <div class="search"><span style="color:#555">⌕</span><input id="searchInput" placeholder="SEARCH BUILDS, STATUS, FPS..." oninput="filterGames()"></div>
+  <div class="grid-lib" id="gridLib"></div>
+  <div class="hint">TAP CARD TO TRANSFORM • OPEN TO LAUNCH</div>
+</div>
+<div class="bottom-nav">
+  <div class="nav-btn reactor active" id="navReactor" onclick="switchTab('reactor')"><div class="nav-t">REACTOR</div><div class="nav-s" id="navReactorSub">CORE-01</div></div>
+  <div class="nav-btn" id="navLibrary" onclick="switchTab('library')"><div class="nav-t">LIBRARY</div><div class="nav-s">208 • 312</div></div>
+  <div class="nav-btn" onclick="switchTab('builds')"><div class="nav-t">BUILDS</div><div class="nav-s">6 SKINS</div></div>
+</div>
 <script>
-const COLORS={'100%':'#a855f7','PLAYED':'#facc15','NEW':'#06b6d4','SYNC':'#f97316','ACTIVE':'#ef4444','LIVE':'#ec4899','READY':'#3b82f6'};
-const GAMES=[['Palworld','🎯','100%','Steam'],['Helldivers 2','🏹','PLAYED','Steam'],['God of War','🚀','ACTIVE','PS5'],['Elden Ring','💍','PLAYED','Steam'],['Cyberpunk','🌃','ACTIVE','GOG'],['GTA V','🏙️','PLAYED','Epic'],['Minecraft','⛏️','LIVE','Xbox'],['Forza','🏎️','NEW','Xbox']];
-while(GAMES.length<312){GAMES.push(['Game '+GAMES.length,['🎮','🕹️','🎯'][GAMES.length%3],Object.keys(COLORS)[GAMES.length%7],['Steam','Epic','GOG','Xbox','PS5'][GAMES.length%5])}
-function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
-function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.getElementById(id).classList.add('on');document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('act',b.dataset.s===id));document.querySelectorAll('.bbtn').forEach(b=>b.classList.toggle('act',b.dataset.p===id));window.scrollTo(0,0)}
-function showBox(title,body,nextPage,pkg){
- document.getElementById('mTitle').textContent=title;
- document.getElementById('mBody').innerHTML=body;
- let n=document.getElementById('mNext'),o=document.getElementById('mOpen'),c=document.getElementById('mCopy');
- n.style.display=nextPage?'inline-block':'none'; if(nextPage){n.textContent='OPEN '+nextPage.toUpperCase()+' →'; n.onclick=()=>{document.getElementById('modal').classList.remove('on');showPage(nextPage)}}
- o.style.display=pkg?'inline-block':'none'; if(pkg){o.onclick=()=>{toast('Launching '+pkg); let a=document.createElement('a'); a.href='intent://'+pkg+'#Intent;package='+pkg+';end'; document.body.appendChild(a); a.click(); setTimeout(()=>a.remove(),800); window.open('https://play.google.com/store/search?q='+pkg,'_blank')}}
- c.style.display=pkg?'inline-block':'none'; if(pkg){c.onclick=()=>{navigator.clipboard.writeText(pkg);toast('Copied')}}
- document.getElementById('modal').classList.add('on');
-}
-document.querySelectorAll('.pill').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.s)));
-document.querySelectorAll('.bbtn').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.p)));
-document.getElementById('ecoCards').innerHTML=['Windows Launcher','Android App','API Gateway','Core Services 11','Storage Layer','Steam','Epic','GOG','Xbox'].map(n=>`<div class="card" onclick="showBox('${n}','${n} integration','${n.includes('Launcher')||n.includes('Steam')?'library':n.includes('API')?'back':'db'}','com.${n.toLowerCase().replace(/ /g,'')}')"><b>${n}</b><div style="font-size:9px;color:var(--red)">TAP → ${n.includes('Launcher')?'LIBRARY':n.includes('API')?'BACKEND':'DATABASE'}</div></div>`).join('');
-document.getElementById('provCards').innerHTML=['Steam','Epic','GOG','Xbox','Ubisoft','EA','Battle.net','Amazon'].map(p=>`<div class="card" onclick="showBox('${p}','Provider ${p}<br>Authenticate → GetLibrary → Launch','plug','com.${p.toLowerCase()}.app')"><b>${p}</b><div style="font-size:9px;color:var(--red)">TAP → PLUGINS</div></div>`).join('');
-document.getElementById('plugCards').innerHTML=['Steam.dll','Epic.dll','Xbox.dll','Github.dll','AI.dll'].map(d=>`<div class="card" onclick="showBox('${d}','Plugin ${d}<br>Version 1.2.9<br>Status Loaded','ai','${d}')"><b>${d}</b><div style="font-size:9px;color:#0f0">● Loaded — TAP → AI</div></div>`).join('');
-document.getElementById('aiCards').innerHTML=[['OpenAI','gpt-4o'],['Azure','mini'],['Anthropic','claude-3.5']].map(([p,m])=>`<div class="card" onclick="showBox('${p}','Model ${m}<br>Online','market','${p}')"><b>${p}</b><div style="font-size:9px">${m} — TAP → MARKETPLACE</div></div>`).join('');
-document.getElementById('marketCards').innerHTML=GAMES.slice(0,10).map(g=>`<div class="card" onclick="showBox('${g[0]}','${g[3]} game','library','com.${g[0].toLowerCase().replace(/ /g,'')}')"><b>${g[0]}</b><div style="font-size:9px">${g[3]} — TAP → LIBRARY</div></div>`).join('');
-document.getElementById('msgCards').innerHTML=['RabbitMQ','Kafka','GameInstalled','GameLaunched'].map(b=>`<div class="card" onclick="showBox('${b}','Event ${b}','sec')"><b>${b}</b><div style="font-size:9px;color:var(--red)">TAP → SECURITY</div></div>`).join('');
-document.getElementById('secCards').innerHTML=['AES-256','TLS 1.3','MFA','GDPR','SOC2'].map(s=>`<div class="card" onclick="showBox('${s}','${s} Enabled','front')">${s} → FRONTEND</div>`).join('');
-document.getElementById('frontCards').innerHTML=['WinUI 3','Launcher','Game Library'].map(f=>`<div class="card" onclick="showBox('${f}','${f} module','back')"><b>${f}</b><div style="font-size:9px;color:var(--red)">TAP → BACKEND</div></div>`).join('');
-document.getElementById('backCards').innerHTML=['Commit','Build','Tests','Deploy','ASP.NET','Kubernetes'].map(t=>`<div class="card" onclick="showBox('${t}','${t} ✅ Success','road')"><b>${t}</b><div style="font-size:9px;color:var(--red)">TAP → ROADMAP</div></div>`).join('');
-document.getElementById('roadCards').innerHTML=['FLG AI','FLG Cloud','FLG Marketplace','FLG Streaming'].map(r=>`<div class="card" style="border-left:3px solid var(--red)" onclick="showBox('${r}','${r} Q1 2026','reactor')"><b>${r}</b><div style="font-size:9px;color:var(--red)">TAP → REACTOR</div></div>`).join('');
-document.getElementById('buildCards').innerHTML=[['UNIFIED GRID','Playnite'],['PS5 TRACE','DualSense']].map(([t,s])=>`<div class="card" onclick="showPage('reactor');toast('CORE → '+t)"><b>${t}</b><div style="font-size:9px">${s} — TAP → REACTOR</div></div>`).join('');
-let view='grid';
-function renderLib(){
- let q=document.getElementById('search').value.toLowerCase();
- let filtered=GAMES.filter(g=>g[0].toLowerCase().includes(q));
- let h='';
- filtered.forEach((g,i)=>{
-  let col=COLORS[g[2]];
-  h+=`<div class="card" style="border-bottom:3px solid ${col}"><div style="display:flex;justify-content:space-between;font-size:9px;padding:4px"><span><span class="dot" style="background:${col}"></span> ${g[2]}</span><span>#${String(i).padStart(3,'0')}</span></div><div style="padding:12px;text-align:center" onclick="applyTheme('${g[0]}','${g[2]}','${col}')"><div style="font-size:28px">${g[1]}</div><div style="font-weight:900">${g[0]}</div><div style="font-size:9px;color:#666">${g[3]}</div><div style="font-size:9px;color:${col};margin-top:4px">TAP = TRANSFORM → REACTOR</div></div><div style="display:flex;justify-content:space-between;padding:10px;background:#0a0a0a;border-top:1px solid #1a1a1a;font-size:11px;font-weight:800" onclick="showBox('${g[0]}','Launching ${g[0]}<br>Provider ${g[3]}','reactor','com.${g[3].toLowerCase()}.${g[0].toLowerCase().replace(/ /g,'')}')"><span>OPEN →</span><span style="width:28px;height:28px;border-radius:50%;background:${col};display:flex;align-items:center;justify-content:center;color:#000">↗</span></div></div>`;
+const games=[
+ {title:"PALWORLD",pkg:"com.factoryline.palworld",provider:"FactoryLine",icon:"🎮",color:"#a855f7",status:"100%",fps:120},
+ {title:"ELDEN RING",pkg:"com.factoryline.eldenring",provider:"FactoryLine",icon:"👾",color:"#facc15",status:"PLAYED",fps:97},
+ {title:"CYBERPUNK 2077",pkg:"com.factoryline.cyberpunk",provider:"FactoryLine",icon:"🚀",color:"#06b6d4",status:"NEW",fps:134},
+ {title:"FORTNITE",pkg:"com.factoryline.fortnite",provider:"FactoryLine",icon:"🏹",color:"#f97316",status:"SYNC",fps:231},
+ {title:"FORZA HORIZON 5",pkg:"Xbox/Forza5",provider:"Xbox",icon:"🏁",color:"#f97316",status:"INSTALLED",fps:144},
+ {title:"WITCHER 3",pkg:"GOG/Witcher3",provider:"GOG",icon:"🐺",color:"#444",status:"INSTALLED",fps:120},
+ {title:"DIABLO IV",pkg:"Bnet/Diablo4",provider:"Battle.net",icon:"😈",color:"#991b1b",status:"INSTALLED",fps:160},
+ {title:"ASSASSINS CREED",pkg:"Ubisoft/AC",provider:"Ubisoft",icon:"🗡️",color:"#1e3a8a",status:"INSTALLED",fps:90},
+ {title:"FIFA 25",pkg:"EA/FC25",provider:"EA App",icon:"⚽",color:"#00ff88",status:"INSTALLED",fps:144},
+ {title:"NEW WORLD",pkg:"Amazon/NewWorld",provider:"Amazon",icon:"🌲",color:"#f59e0b",status:"INSTALLED",fps:110},
+ {title:"Discord",pkg:"com.discord",provider:"ANDROID",icon:"💬",color:"#a855f7",status:"INSTALLED",fps:60},
+ {title:"Steam",pkg:"com.valvesoftware.android.steam.community",provider:"ANDROID",icon:"🔥",color:"#ff1515",status:"INSTALLED",fps:60},
+];
+function renderGames(list=games){
+ const grid=document.getElementById('gridLib');grid.innerHTML='';
+ list.forEach(g=>{
+   const el=document.createElement('div');el.className='card';el.style.setProperty('--glow',g.color);
+   el.innerHTML=`<div class="card-top" style="background:${g.color}"></div><div class="card-body"><div class="card-icon">${g.icon}</div><div><div class="badge" style="border-color:${g.color};color:${g.color}">${g.status}</div><div class="fps">${g.fps} FPS</div></div></div><div class="card-title">${g.title}</div><div class="card-pkg">${g.provider} • ${g.pkg}</div><div class="card-foot"><div class="open-btn" onclick="event.stopPropagation();openGame('${g.title}')">OPEN →</div><div class="arrow" style="border-color:${g.color};color:${g.color}">↗</div></div><div class="card-glow" style="background:${g.color}"></div>`;
+   el.onclick=()=>transformCore(g);grid.appendChild(el);
  });
- document.getElementById('libGrid').innerHTML=h;
 }
-function applyTheme(name,status,col){document.documentElement.style.setProperty('--red',col);document.getElementById('core').style.boxShadow='0 0 80px '+col;document.getElementById('tLabel').textContent='CORE TRANSFORMED → '+name+' • '+status;toast('CORE → '+name);showPage('reactor');}
-document.getElementById('search').addEventListener('input',renderLib);
-document.getElementById('bGrid').addEventListener('click',()=>{view='grid';document.getElementById('bGrid').classList.add('act');document.getElementById('bCompact').classList.remove('act');document.getElementById('libGrid').className='grid2';renderLib()});
-document.getElementById('bCompact').addEventListener('click',()=>{view='compact';document.getElementById('bCompact').classList.add('act');document.getElementById('bGrid').classList.remove('act');document.getElementById('libGrid').className='grid2';renderLib()});
-renderLib();
-</script></body></html>
+function transformCore(game){
+ document.documentElement.style.setProperty('--glow',game.color);
+ document.getElementById('ringOuter').style.borderColor=game.color;
+ document.getElementById('ringOuter').style.boxShadow=`0 0 24px ${game.color}`;
+ document.getElementById('ringInner').style.borderColor=game.color;
+ document.getElementById('coreText').textContent=game.icon;
+ document.getElementById('coreText').style.color=game.color;
+ document.getElementById('corePct').textContent=`${game.fps}% ACTIVE`;
+ document.getElementById('corePct').style.color=game.color;
+ document.getElementById('buildLabel').textContent=`${game.title.toUpperCase()}-01`;
+ document.getElementById('buildLabel').style.color=game.color;
+ document.getElementById('buildCardLabel').textContent=`${game.title.toUpperCase()}-01`;
+ document.getElementById('buildCardLabel').style.color=game.color;
+ document.getElementById('headerActive').textContent=`${game.title.toUpperCase()} • ACTIVE...`;
+ document.getElementById('navReactorSub').textContent=game.title.substring(0,8).toUpperCase();
+ switchTab('reactor');
+}
+function openGame(title){alert(`${title} would launch on Android. Tap card to transform reactor.`);}
+function filterGames(){const q=document.getElementById('searchInput').value.toLowerCase();renderGames(games.filter(g=>g.title.toLowerCase().includes(q)||g.status.toLowerCase().includes(q)));}
+function switchTab(tab){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+ if(tab==='reactor'){document.getElementById('reactorPage').classList.add('active');document.getElementById('navReactor').classList.add('active');}
+ if(tab==='library'){document.getElementById('libraryPage').classList.add('active');document.getElementById('navLibrary').classList.add('active');}
+ if(tab==='builds'){document.getElementById('libraryPage').classList.add('active');document.getElementById('navLibrary').classList.add('active');alert('BUILDS: 6 skins - tap any Library card to transform core');}
+}
+renderGames();
+</script>
+</body>
+</html>
