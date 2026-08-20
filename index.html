@@ -1,45 +1,77 @@
-┌──────────────────────────────────────┐
-│            FLG Ecosystem             │
-└──────────────────────────────────────┘
-User Devices
-├── Windows Launcher (WinUI 3 + .NET 9)
-├── Android App (.NET MAUI)
-├── iOS App (.NET MAUI)
-├── Linux Launcher (Avalonia)
-└── Web Portal (React + Electron optional)
-│
-▼
-API Gateway (NGINX + Redis Rate Limiting)
-│
-▼
-┌────────────────────────────────────┐
-│          Core Services             │
-├────────────────────────────────────┤
-│ Authentication Service             │
-│ User Management                    │
-│ Library Service                    │
-│ AI Service                         │
-│ Marketplace Service                │
-│ Plugin Service                     │
-│ Search Service                     │
-│ Analytics Service                  │
-│ Notification Service               │
-│ Billing Service                    │
-│ Licensing Service                  │
-└────────────────────────────────────┘
-│
-▼
-Storage Layer
-├── PostgreSQL (primary)
-├── Redis (cache + sessions)
-├── Elasticsearch (search)
-├── Object Storage (S3 / Azure Blob)
-└── Data Warehouse (Synapse / Databricks)
-│
-▼
-External Integrations
-├── Steam, Epic, GOG, Xbox, Ubisoft, EA, Battle.net, Amazon Games
-├── Playnite Integrations
-├── GitHub
-├── AI Providers (OpenAI, Azure OpenAI, Anthropic, Google AI)
-└── Future Plugins
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FLG v3.12.9 FIXED</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#fff;font-family:monospace}:root{--red:#ff1515}.top{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;gap:6px;padding:8px;overflow-x:auto;background:#000}.pill{white-space:nowrap;padding:9px 14px;border-radius:999px;border:1px solid #222;background:#0a0a0a;color:#777;font-size:9px;font-weight:900;cursor:pointer}.pill.act{background:#fff;color:#000}.page{display:none;min-height:100vh;padding:76px 12px 100px}.page.on{display:block}.card{background:#0c0c0c;border:1px solid #1e1e1e;border-radius:16px;padding:14px;cursor:pointer;margin:8px 0}.card:hover{border-color:var(--red)}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.bottom{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:60;display:flex;gap:6px;padding:6px;background:rgba(12,12,12,0.95);border:1px solid #333;border-radius:999px}.bbtn{padding:12px 18px;border-radius:999px;border:1px solid #222;background:#0a0a0a;color:#888;font-size:10px;font-weight:900;cursor:pointer}.bbtn.act{background:var(--red);color:#000}.core{width:92vw;max-width:480px;aspect-ratio:1;margin:50px auto 20px;border-radius:50%;background:radial-gradient(at 30% 30%,#ff3a3a,#7a0000 60%,#1a0000);box-shadow:0 0 60px rgba(255,21,21,0.6);display:flex;align-items:center;justify-content:center;font-size:120px;font-weight:900;color:#000}.btn{padding:12px 16px;border-radius:999px;border:1px solid #333;background:#111;color:#fff;font-weight:800;font-size:11px;cursor:pointer;margin:4px}.btn.red{background:var(--red);color:#000;border-color:var(--red)}.search{width:100%;background:#0c0c0c;border:1px solid #1e1e1e;border-radius:12px;padding:14px;color:#fff;margin:10px 0;outline:none}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--red);color:#000;padding:10px 18px;border-radius:999px;font-weight:900;font-size:11px;z-index:999;display:none}.modal{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:100;display:none;align-items:center;justify-content:center;padding:16px}.modal.on{display:flex}.box{background:#0c0c0c;border:1px solid var(--red);border-radius:16px;padding:20px;max-width:420px;width:100%}.dot{width:8px;height:8px;border-radius:50%;display:inline-block}</style></head><body>
+<div class="top">
+<button class="pill act" data-s="reactor">REACTOR CORE</button>
+<button class="pill" data-s="eco">ECOSYSTEM</button>
+<button class="pill" data-s="db">DATABASE</button>
+<button class="pill" data-s="prov">PROVIDERS</button>
+<button class="pill" data-s="plug">PLUGINS</button>
+<button class="pill" data-s="ai">AI MODELS</button>
+<button class="pill" data-s="market">MARKETPLACE</button>
+<button class="pill" data-s="msg">MESSAGING</button>
+<button class="pill" data-s="sec">SECURITY</button>
+<button class="pill" data-s="front">FRONTEND</button>
+<button class="pill" data-s="back">BACKEND</button>
+<button class="pill" data-s="road">ROADMAP</button>
+</div>
+<div id="reactor" class="page on"><div class="core" id="core">FL</div><div style="text-align:center;letter-spacing:0.3em;font-weight:900">FACTORY LINE<br><span style="color:var(--red)">GAMING</span><div style="font-size:8px;color:#666;margin-top:6px">FLG • ADVANCED REACTOR CORE • SECURE CORE v3.12.9</div><div id="tLabel" style="color:var(--red);font-size:10px;margin-top:8px"></div></div><div style="text-align:center;margin-top:20px"><button class="btn red" onclick="showPage('library')">OPEN LIBRARY →</button><button class="btn" onclick="showPage('eco')">ECOSYSTEM →</button><button class="btn" onclick="showPage('market')">MARKETPLACE →</button></div><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:20px"><div class="card" onclick="showPage('library')"><b>📚 Library 312</b><div style="font-size:9px;color:var(--red)">TAP → LIBRARY</div></div><div class="card" onclick="showPage('front')"><b>⚙️ Settings FIXED</b><div style="font-size:9px">Tap opens Backend</div><div style="margin-top:8px"><button class="btn red" onclick="event.stopPropagation();showPage('back')">OPEN BACKEND →</button><button class="btn" onclick="event.stopPropagation();showPage('reactor')">REACTOR →</button></div></div></div></div>
+<div id="eco" class="page"><h2 style="color:var(--red)">ECOSYSTEM</h2><button class="btn red" onclick="showPage('reactor')">← REACTOR</button><div id="ecoCards" style="margin-top:12px"></div></div>
+<div id="db" class="page"><h2 style="color:var(--red)">DATABASE</h2><button class="btn red" onclick="showPage('prov')">NEXT → PROVIDERS</button><div class="card" onclick="toast('copied → PROVIDERS');setTimeout(()=>showPage('prov'),600)"><b>users / games / ai_models</b><div style="font-size:9px;color:var(--red)">TAP → PROVIDERS</div></div></div>
+<div id="prov" class="page"><h2 style="color:var(--red)">PROVIDERS</h2><button class="btn red" onclick="showPage('plug')">NEXT → PLUGINS</button><div id="provCards" style="margin-top:12px"></div></div>
+<div id="plug" class="page"><h2 style="color:var(--red)">PLUGINS</h2><button class="btn red" onclick="showPage('ai')">NEXT → AI</button><div id="plugCards" style="margin-top:12px"></div></div>
+<div id="ai" class="page"><h2 style="color:var(--red)">AI MODELS</h2><button class="btn red" onclick="showPage('market')">NEXT → MARKETPLACE</button><div id="aiCards" style="margin-top:12px"></div></div>
+<div id="market" class="page"><h2 style="color:var(--red)">MARKETPLACE</h2><button class="btn red" onclick="showPage('library')">OPEN LIBRARY →</button><div id="marketCards" class="grid2" style="margin-top:12px"></div></div>
+<div id="msg" class="page"><h2 style="color:var(--red)">MESSAGING</h2><button class="btn red" onclick="showPage('sec')">NEXT → SECURITY</button><div id="msgCards" style="margin-top:12px"></div></div>
+<div id="sec" class="page"><h2 style="color:var(--red)">SECURITY</h2><button class="btn red" onclick="showPage('front')">NEXT → FRONTEND</button><div id="secCards" style="margin-top:12px"></div></div>
+<div id="front" class="page"><h2 style="color:var(--red)">FRONTEND — SETTINGS FIXED</h2><button class="btn red" onclick="showPage('back')">NEXT → BACKEND</button><div class="card" onclick="showPage('back')" style="margin-top:12px;border:1px solid var(--red)"><b>⚙️ Settings — FIXED</b><div style="font-size:11px;margin-top:6px;line-height:1.5">Settings module<br>Click to open Settings</div><div style="margin-top:12px;display:flex;gap:6px"><button class="btn red" onclick="event.stopPropagation();showPage('back')">OPEN BACKEND →</button><button class="btn" onclick="event.stopPropagation();showPage('reactor')">REACTOR →</button><button class="btn" onclick="event.stopPropagation();showPage('library')">LIBRARY →</button></div></div><div id="frontCards" style="margin-top:12px"></div></div>
+<div id="back" class="page"><h2 style="color:var(--red)">BACKEND</h2><button class="btn red" onclick="showPage('road')">NEXT → ROADMAP</button><div id="backCards" style="margin-top:12px"></div></div>
+<div id="road" class="page"><h2 style="color:var(--red)">ROADMAP</h2><button class="btn red" onclick="showPage('reactor')">← REACTOR</button><div id="roadCards" style="margin-top:12px"></div></div>
+<div id="library" class="page"><h2 style="color:var(--red)">LIBRARY • 312</h2><input id="search" class="search" placeholder="SEARCH 312..."><div style="display:flex;gap:8px"><button class="pill act" id="bGrid">⊞ GRID</button><button class="pill" id="bCompact">☰ COMPACT</button></div><div id="libGrid" class="grid2" style="margin-top:10px"></div></div>
+<div id="builds" class="page"><h2 style="color:var(--red)">BUILDS</h2><div id="buildCards" style="margin-top:12px"></div></div>
+<div class="bottom"><button class="bbtn act" data-p="reactor">REACTOR</button><button class="bbtn" data-p="library">LIBRARY</button><button class="bbtn" data-p="builds">BUILDS</button></div>
+<div class="toast" id="toast"></div>
+<div class="modal" id="modal" onclick="this.classList.remove('on')"><div class="box" onclick="event.stopPropagation()"><h3 id="mTitle" style="color:var(--red)"></h3><div id="mBody" style="font-size:11px;margin-top:10px;line-height:1.6"></div><div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap"><button class="btn red" onclick="document.getElementById('modal').classList.remove('on')">CLOSE</button><button class="btn" id="mNext">NEXT →</button><button class="btn" id="mOpen">OPEN APP ↗</button><button class="btn" id="mCopy">COPY</button></div></div></div>
+<script>
+const COLORS={'100%':'#a855f7','PLAYED':'#facc15','NEW':'#06b6d4','SYNC':'#f97316','ACTIVE':'#ef4444','LIVE':'#ec4899','READY':'#3b82f6'};
+const GAMES=[['Palworld','🎯','100%','Steam'],['Helldivers 2','🏹','PLAYED','Steam'],['God of War','🚀','ACTIVE','PS5'],['Elden Ring','💍','PLAYED','Steam'],['Cyberpunk','🌃','ACTIVE','GOG'],['GTA V','🏙️','PLAYED','Epic'],['Minecraft','⛏️','LIVE','Xbox'],['Forza','🏎️','NEW','Xbox']];
+while(GAMES.length<312){GAMES.push(['Game '+GAMES.length,['🎮','🕹️','🎯'][GAMES.length%3],Object.keys(COLORS)[GAMES.length%7],['Steam','Epic','GOG','Xbox','PS5'][GAMES.length%5])}
+function toast(m){let t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));document.getElementById(id).classList.add('on');document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('act',b.dataset.s===id));document.querySelectorAll('.bbtn').forEach(b=>b.classList.toggle('act',b.dataset.p===id));window.scrollTo(0,0)}
+function showBox(title,body,nextPage,pkg){
+ document.getElementById('mTitle').textContent=title;
+ document.getElementById('mBody').innerHTML=body;
+ let n=document.getElementById('mNext'),o=document.getElementById('mOpen'),c=document.getElementById('mCopy');
+ n.style.display=nextPage?'inline-block':'none'; if(nextPage){n.textContent='OPEN '+nextPage.toUpperCase()+' →'; n.onclick=()=>{document.getElementById('modal').classList.remove('on');showPage(nextPage)}}
+ o.style.display=pkg?'inline-block':'none'; if(pkg){o.onclick=()=>{toast('Launching '+pkg); let a=document.createElement('a'); a.href='intent://'+pkg+'#Intent;package='+pkg+';end'; document.body.appendChild(a); a.click(); setTimeout(()=>a.remove(),800); window.open('https://play.google.com/store/search?q='+pkg,'_blank')}}
+ c.style.display=pkg?'inline-block':'none'; if(pkg){c.onclick=()=>{navigator.clipboard.writeText(pkg);toast('Copied')}}
+ document.getElementById('modal').classList.add('on');
+}
+document.querySelectorAll('.pill').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.s)));
+document.querySelectorAll('.bbtn').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.p)));
+document.getElementById('ecoCards').innerHTML=['Windows Launcher','Android App','API Gateway','Core Services 11','Storage Layer','Steam','Epic','GOG','Xbox'].map(n=>`<div class="card" onclick="showBox('${n}','${n} integration','${n.includes('Launcher')||n.includes('Steam')?'library':n.includes('API')?'back':'db'}','com.${n.toLowerCase().replace(/ /g,'')}')"><b>${n}</b><div style="font-size:9px;color:var(--red)">TAP → ${n.includes('Launcher')?'LIBRARY':n.includes('API')?'BACKEND':'DATABASE'}</div></div>`).join('');
+document.getElementById('provCards').innerHTML=['Steam','Epic','GOG','Xbox','Ubisoft','EA','Battle.net','Amazon'].map(p=>`<div class="card" onclick="showBox('${p}','Provider ${p}<br>Authenticate → GetLibrary → Launch','plug','com.${p.toLowerCase()}.app')"><b>${p}</b><div style="font-size:9px;color:var(--red)">TAP → PLUGINS</div></div>`).join('');
+document.getElementById('plugCards').innerHTML=['Steam.dll','Epic.dll','Xbox.dll','Github.dll','AI.dll'].map(d=>`<div class="card" onclick="showBox('${d}','Plugin ${d}<br>Version 1.2.9<br>Status Loaded','ai','${d}')"><b>${d}</b><div style="font-size:9px;color:#0f0">● Loaded — TAP → AI</div></div>`).join('');
+document.getElementById('aiCards').innerHTML=[['OpenAI','gpt-4o'],['Azure','mini'],['Anthropic','claude-3.5']].map(([p,m])=>`<div class="card" onclick="showBox('${p}','Model ${m}<br>Online','market','${p}')"><b>${p}</b><div style="font-size:9px">${m} — TAP → MARKETPLACE</div></div>`).join('');
+document.getElementById('marketCards').innerHTML=GAMES.slice(0,10).map(g=>`<div class="card" onclick="showBox('${g[0]}','${g[3]} game','library','com.${g[0].toLowerCase().replace(/ /g,'')}')"><b>${g[0]}</b><div style="font-size:9px">${g[3]} — TAP → LIBRARY</div></div>`).join('');
+document.getElementById('msgCards').innerHTML=['RabbitMQ','Kafka','GameInstalled','GameLaunched'].map(b=>`<div class="card" onclick="showBox('${b}','Event ${b}','sec')"><b>${b}</b><div style="font-size:9px;color:var(--red)">TAP → SECURITY</div></div>`).join('');
+document.getElementById('secCards').innerHTML=['AES-256','TLS 1.3','MFA','GDPR','SOC2'].map(s=>`<div class="card" onclick="showBox('${s}','${s} Enabled','front')">${s} → FRONTEND</div>`).join('');
+document.getElementById('frontCards').innerHTML=['WinUI 3','Launcher','Game Library'].map(f=>`<div class="card" onclick="showBox('${f}','${f} module','back')"><b>${f}</b><div style="font-size:9px;color:var(--red)">TAP → BACKEND</div></div>`).join('');
+document.getElementById('backCards').innerHTML=['Commit','Build','Tests','Deploy','ASP.NET','Kubernetes'].map(t=>`<div class="card" onclick="showBox('${t}','${t} ✅ Success','road')"><b>${t}</b><div style="font-size:9px;color:var(--red)">TAP → ROADMAP</div></div>`).join('');
+document.getElementById('roadCards').innerHTML=['FLG AI','FLG Cloud','FLG Marketplace','FLG Streaming'].map(r=>`<div class="card" style="border-left:3px solid var(--red)" onclick="showBox('${r}','${r} Q1 2026','reactor')"><b>${r}</b><div style="font-size:9px;color:var(--red)">TAP → REACTOR</div></div>`).join('');
+document.getElementById('buildCards').innerHTML=[['UNIFIED GRID','Playnite'],['PS5 TRACE','DualSense']].map(([t,s])=>`<div class="card" onclick="showPage('reactor');toast('CORE → '+t)"><b>${t}</b><div style="font-size:9px">${s} — TAP → REACTOR</div></div>`).join('');
+let view='grid';
+function renderLib(){
+ let q=document.getElementById('search').value.toLowerCase();
+ let filtered=GAMES.filter(g=>g[0].toLowerCase().includes(q));
+ let h='';
+ filtered.forEach((g,i)=>{
+  let col=COLORS[g[2]];
+  h+=`<div class="card" style="border-bottom:3px solid ${col}"><div style="display:flex;justify-content:space-between;font-size:9px;padding:4px"><span><span class="dot" style="background:${col}"></span> ${g[2]}</span><span>#${String(i).padStart(3,'0')}</span></div><div style="padding:12px;text-align:center" onclick="applyTheme('${g[0]}','${g[2]}','${col}')"><div style="font-size:28px">${g[1]}</div><div style="font-weight:900">${g[0]}</div><div style="font-size:9px;color:#666">${g[3]}</div><div style="font-size:9px;color:${col};margin-top:4px">TAP = TRANSFORM → REACTOR</div></div><div style="display:flex;justify-content:space-between;padding:10px;background:#0a0a0a;border-top:1px solid #1a1a1a;font-size:11px;font-weight:800" onclick="showBox('${g[0]}','Launching ${g[0]}<br>Provider ${g[3]}','reactor','com.${g[3].toLowerCase()}.${g[0].toLowerCase().replace(/ /g,'')}')"><span>OPEN →</span><span style="width:28px;height:28px;border-radius:50%;background:${col};display:flex;align-items:center;justify-content:center;color:#000">↗</span></div></div>`;
+ });
+ document.getElementById('libGrid').innerHTML=h;
+}
+function applyTheme(name,status,col){document.documentElement.style.setProperty('--red',col);document.getElementById('core').style.boxShadow='0 0 80px '+col;document.getElementById('tLabel').textContent='CORE TRANSFORMED → '+name+' • '+status;toast('CORE → '+name);showPage('reactor');}
+document.getElementById('search').addEventListener('input',renderLib);
+document.getElementById('bGrid').addEventListener('click',()=>{view='grid';document.getElementById('bGrid').classList.add('act');document.getElementById('bCompact').classList.remove('act');document.getElementById('libGrid').className='grid2';renderLib()});
+document.getElementById('bCompact').addEventListener('click',()=>{view='compact';document.getElementById('bCompact').classList.add('act');document.getElementById('bGrid').classList.remove('act');document.getElementById('libGrid').className='grid2';renderLib()});
+renderLib();
+</script></body></html>
