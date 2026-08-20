@@ -1,31 +1,336 @@
-<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>
-body{background:#000;color:#fff;margin:0;font-family:sans-serif}
-.top{padding:20px 18px;background:#000;border-bottom:1px solid #222;position:sticky;top:0;z-index:10}
-h1{font-size:36px!important;font-weight:900;letter-spacing:1px}h1 span{color:#ff1515;text-shadow:0 0 30px #ff1515}
-.sub{color:#ff1515;font-size:18px!important;letter-spacing:4px;font-weight:900;margin-top:6px} .build{color:#777;font-size:14px!important;letter-spacing:3px;margin-top:6px}
-.bar{padding:14px;text-align:center;border-bottom:1px solid #111;font-size:16px;letter-spacing:2px}
-.bar span:last-child{color:#ff4444;border:1px solid #ff151566;padding:8px 18px;border-radius:30px;margin-left:16px;font-weight:800}
-.rings{width:520px;height:520px;margin:30px auto 10px;position:relative;display:flex;align-items:center;justify-content:center}
-.ring{position:absolute;border-radius:50%;border:2px solid #222}.ring:first-child{inset:0;border-color:#ff151544} .ring:nth-child(2){inset:40px;border-style:dashed}
-.core{width:240px!important;height:240px!important;background:radial-gradient(circle at 30% 25%, #ff9a9a, #ff1515 45%, #7a0000);border-radius:50px;display:flex;align-items:center;justify-content:center;font-size:88px!important;font-weight:900;color:#000;box-shadow:0 0 100px #ff1515,0 0 200px #ff151566;z-index:2}
-.motto{text-align:center;padding:20px} .motto h2{font-size:34px!important;letter-spacing:3px;font-weight:900} .motto p{color:#ff1515;font-size:22px!important;letter-spacing:10px;font-weight:900;margin-top:16px;text-shadow:0 0 20px #ff1515}
-.live{margin:30px auto;border:2px solid #222;border-radius:100px;padding:14px 28px;display:inline-flex;gap:12px;font-size:18px!important;color:#888}
-.dot{width:14px;height:14px;background:#ff1515;border-radius:50%;box-shadow:0 0 14px #ff1515;display:inline-block}
-.tabs{position:fixed;bottom:18px;left:12px;right:12px;display:flex;gap:10px;background:#0c0c0cf2;border:1px solid #222;border-radius:28px;padding:8px;z-index:20}
-.tab{flex:1;padding:22px;border-radius:20px;background:transparent;border:none;color:#666;font-weight:900;font-size:14px;letter-spacing:2px} .tab.on{background:#ff1515;color:#000;font-size:16px;box-shadow:0 10px 40px #ff1515aa}
-.page{display:none}.page.on{display:block}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px 14px 120px} .card{background:#111;border:1px solid #222;border-radius:20px;padding:20px;text-align:center}
-.card b{font-size:18px} .card div{font-size:14px}
-</style></head><body>
-<div class="top"><div><h1>FACTORY LINE <span>GAMING</span></h1><div class="sub">THAT OPTIMIZE. PERFORMANCE.</div><div class="build">FACTORY RED • BUILD 4.2.0 — CPU TEMP 54°C <span class="dot"></span></div></div></div>
-<div class="bar">REACTOR: <b>ONLINE</b> <span>LOAD 42% • FACTORY RED</span></div>
-<div id="p-reactor" class="page on"><div class="rings"><div class="ring"></div><div class="ring"></div><div class="core">FL</div></div><div class="motto"><h2>WE DON'T GUESS. WE ENGINEER.</h2><p>CORE-X</p><div class="live"><b style="color:#fff">54°C</b> CPU TEMP • LIVE <span class="dot"></span></div></div></div>
-<div id="p-library" class="page"><div style="text-align:center;padding:30px 18px"><h1 style="font-size:48px">FL-CORE<br>LIBRARY</h1><p style="color:#666;margin:14px 0 20px;font-size:18px">300+ Builds • Tap to Launch</p></div><div class="grid" id="grid"></div></div>
-<div id="p-builds" class="page"><div style="text-align:center;padding:30px"><h1>BUILDS</h1></div><div class="grid"><div class="card" style="background:#ff1515;color:#000"><b>Factory Red 4.2.0 ACTIVE</b></div><div class="card"><b>PS5 TRACE</b></div><div class="card"><b>Switch Hybrid</b></div><div class="card"><b>Neon Cyberpunk</b></div></div></div>
-<div class="tabs"><button class="tab" id="t-lib" onclick="show('library')">LIBRARY</button><button class="tab on" id="t-re" onclick="show('reactor')">REACTOR</button><button class="tab" id="t-bui" onclick="show('builds')">BUILDS</button></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob: content: file: intent: market:; script-src * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline';">
+<title>FL-CORE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000;color:#fff;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace,system-ui;min-height:100vh;overflow-x:hidden}
+body{padding-bottom:86px}
+.top-head{display:flex;justify-content:space-between;align-items:flex-start;padding:18px 16px 0 16px}
+.brand{font-size:40px;line-height:0.9;font-weight:900;letter-spacing:-1px}
+.brand .w{color:#fff}
+.brand .r{color:#ff1515}
+.cpu-temp{font-size:11px;color:#ff1515;border:1px solid #ff151522;background:#ff15150d;padding:4px 8px;border-radius:20px;letter-spacing:1px}
+.small-red{color:#ff1515;font-size:11px;letter-spacing:2px;padding:6px 16px;font-weight:700}
+.small-gray{color:#666;font-size:10px;letter-spacing:2px;padding:0 16px 12px 16px}
+.trace-wrap{margin:0 16px;height:4px;background:#111;border-radius:99px;overflow:hidden;position:relative}
+.trace-fill{height:100%;width:68%;background:linear-gradient(90deg,#ff1515,#ff6a6a);box-shadow:0 0 10px #ff1515}
+.pill{display:inline-flex;margin:14px 16px;background:#ff1515;color:#000;font-weight:900;font-size:11px;letter-spacing:1.5px;padding:6px 14px;border-radius:99px}
+.reactor-wrap{position:relative;width:100%;display:flex;justify-content:center;align-items:center;padding:30px 0 10px 0;min-height:340px}
+.ring{position:absolute;border-radius:50%;border:1px solid rgba(255,21,21,0.13);left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none}
+.ring:nth-child(1){width:280px;height:280px}
+.ring:nth-child(2){width:310px;height:310px;border-color:rgba(255,21,21,0.09)}
+.ring:nth-child(3){width:350px;height:350px;border-color:rgba(255,21,21,0.06)}
+.ring:nth-child(4){width:400px;height:400px;border-color:rgba(255,21,21,0.04);border-style:dashed}
+.ring:nth-child(5){width:450px;height:450px;border-color:rgba(255,21,21,0.03)}
+.circle-fl{width:260px;height:260px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ff5a5a 0%,#ff1515 38%,#c80000 72%,#7a0000 100%);display:flex;align-items:center;justify-content:center;position:relative;z-index:2;box-shadow:0 0 60px rgba(255,21,21,0.45), inset 0 0 30px rgba(255,255,255,0.25);border:2px solid #ff3a3a}
+.circle-fl span{color:#000;font-size:90px;font-weight:900;letter-spacing:-4px;line-height:1}
+.load-section{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:18px;padding-bottom:20px}
+.load-circle{width:170px;height:170px;border-radius:50%;background:#000;border:3px solid #ff1515;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 0 30px rgba(255,21,21,0.35), inset 0 0 20px rgba(255,21,21,0.15)}
+.load-circle b{color:#ff1515;font-size:22px;letter-spacing:1px}
+.load-circle i{font-style:normal;color:#666;font-size:10px;margin-top:2px;letter-spacing:2px}
+.load-label{color:#ff1515;font-size:12px;letter-spacing:4px;font-weight:800}
+.ops{color:#444;font-size:11px;letter-spacing:2px;border:1px solid #222;padding:4px 12px;border-radius:20px}
+#page-library{padding:16px}
+.search{width:100%;background:#111;border:1px solid #222;border-radius:12px;padding:14px 14px;color:#fff;font-size:14px;outline:none;letter-spacing:1px}
+.search:focus{border-color:#ff1515}
+.search::placeholder{color:#444}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+@media(min-width:640px){.grid{grid-template-columns:1fr 1fr 1fr}}
+.card{background:#111;border-radius:16px;padding:12px;position:relative;overflow:hidden;cursor:pointer;transition:transform .15s;border:1px solid #1a1a1a}
+.card:active{transform:scale(0.97)}
+.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.status-left{display:flex;align-items:center;gap:6px;font-size:9px;font-weight:800;letter-spacing:1px}
+.dot{width:8px;height:8px;border-radius:50%}
+.num{color:#555;font-size:10px}
+.icon-wrap{display:flex;justify-content:center;margin:6px 0 10px 0}
+.icon-circle{width:54px;height:54px;border-radius:50%;background:#0c0c0c;border:1px solid #222;display:flex;align-items:center;justify-content:center;font-size:26px}
+.card-title{color:#fff;font-weight:900;font-size:12px;letter-spacing:0.5px;text-transform:uppercase;line-height:1.1;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-sub{color:#666;font-size:9px;text-align:center;margin-top:4px;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-bottom{margin-top:12px;display:flex;justify-content:space-between;align-items:center}
+.open{font-size:10px;color:#555;letter-spacing:1px;font-weight:700}
+.arrow{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#000;font-weight:900}
+#tabs{position:fixed;bottom:0;left:0;right:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(10px);border-top:1px solid #1a1a1a;display:flex;z-index:50}
+.tab-btn{flex:1;padding:16px 0;background:none;border:none;color:#555;font-size:11px;letter-spacing:2px;font-weight:800;cursor:pointer}
+.tab-btn.active{color:#ff1515}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#111;border:1px solid #ff1515;color:#fff;padding:10px 18px;border-radius:99px;font-size:11px;letter-spacing:1px;opacity:0;pointer-events:none;transition:.3s;z-index:100;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#launchModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:200;align-items:center;justify-content:center;padding:18px}
+#launchModal.show{display:flex}
+.modal-box{background:#111;border:1px solid #222;border-radius:20px;width:100%;max-width:360px;padding:20px}
+.modal-title{color:#fff;font-weight:900;font-size:14px;letter-spacing:1px}
+.modal-sub{color:#666;font-size:11px;margin-top:4px;word-break:break-all}
+.modal-btns{display:flex;flex-direction:column;gap:8px;margin-top:16px}
+.mbtn{width:100%;padding:13px;border-radius:12px;border:none;font-weight:800;letter-spacing:1px;font-size:12px;cursor:pointer}
+.mbtn.red{background:#ff1515;color:#000}
+.mbtn.dark{background:#1a1a1a;color:#fff;border:1px solid #222}
+.mbtn.ghost{background:transparent;color:#555;border:1px solid #222}
+</style>
+</head>
+<body>
+<div id="page-reactor">
+  <div class="top-head">
+    <div class="brand"><span class="w">FACTORY LINE</span> <span class="r">GAMING</span></div>
+    <div class="cpu-temp">CPU TEMP 52°C</div>
+  </div>
+  <div class="small-red">THAT OPTIMIZE PERFORMANCE</div>
+  <div class="small-gray">FACTORY RED BUILD 4.2.0 // REACTOR CORE</div>
+  <div class="trace-wrap"><div class="trace-fill"></div></div>
+  <div class="pill">REACTOR ONLINE</div>
+  <div class="reactor-wrap">
+    <div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="ring"></div>
+    <div class="circle-fl"><span>FL</span></div>
+  </div>
+  <div class="load-section">
+    <div class="load-circle"><b>LOAD 40%</b><i>FACTORY RED</i></div>
+    <div class="load-label">FACTORY RED</div>
+    <div class="ops">95 OPS // STABLE</div>
+  </div>
+</div>
+
+<div id="page-library" style="display:none">
+  <input id="searchInput" class="search" placeholder="SEARCH GAMES...">
+  <div id="gamesGrid" class="grid"></div>
+</div>
+
+<div id="page-system" style="display:none;padding:18px">
+  <div style="border:1px solid #1a1a1a;background:#0c0c0c;border-radius:16px;padding:16px">
+    <div style="color:#ff1515;font-size:11px;letter-spacing:2px;font-weight:800">GLOBAL TRACE</div>
+    <div style="margin-top:10px;height:2px;background:#111"><div style="width:42%;height:100%;background:#ff1515"></div></div>
+    <div style="margin-top:16px;color:#666;font-size:10px;line-height:1.6;letter-spacing:1px">
+      FL-CORE v4.2.0<br>
+      FACTORY RED PROTOCOL ACTIVE<br>
+      CSP: PERMISSIVE<br>
+      NO EXTERNAL DEPS<br>
+      SINGLE FILE READY FOR GITHUB PAGES
+    </div>
+  </div>
+</div>
+
+<div id="tabs">
+  <button class="tab-btn active" onclick="switchTab('reactor',this)">REACTOR</button>
+  <button class="tab-btn" onclick="switchTab('library',this)">LIBRARY</button>
+  <button class="tab-btn" onclick="switchTab('system',this)">SYSTEM</button>
+</div>
+
+<div id="toast"></div>
+
+<div id="launchModal">
+  <div class="modal-box">
+    <div id="modalTitle" class="modal-title">LAUNCH GAME</div>
+    <div id="modalSub" class="modal-sub">path</div>
+    <div class="modal-btns">
+      <button class="mbtn red" onclick="openApp()">OPEN APP →</button>
+      <button class="mbtn dark" onclick="copyPath()">COPY PATH</button>
+      <button class="mbtn dark" onclick="openStore()">PLAY STORE</button>
+      <button class="mbtn ghost" onclick="closeModal()">CLOSE</button>
+    </div>
+  </div>
+</div>
+
 <script>
-function show(p){document.querySelectorAll('.page').forEach(e=>e.classList.remove('on'));document.getElementById('p-'+p).classList.add('on');document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));document.getElementById('t-'+(p=='reactor'?'re':p=='library'?'lib':'bui')).classList.add('on');if(p=='library')render();}
-let lib=[];let names=["God of War","Gran Turismo","GTA","Tekken","DBZ","Monster Hunter","Zelda","Smash","Pokemon","Mario"];for(let i=0;i<312;i++){lib.push({t:`FL ${names[i%names.length]} #${i}`,s:["PSP","PS2","GC","GBA"][i%4]})}
-function render(){document.getElementById('grid').innerHTML=lib.slice(0,100).map(g=>`<div class=card onclick="alert('${g.t}')"><div style='font-size:40px'>🎮</div><b>${g.t}</b><div style='color:#ff4444;margin-top:6px'>● LIVE</div><div style='color:#666'>${g.s}</div></div>`).join('')}
-render();
-</script></body></html>
+const games = [
+{id:1,pkg:"com.palworld.mobile",name:"PALWORLD",path:"palworld.com/game",icon:"🐾",sub:"SURVIVAL CRAFT",status:"ACTIVE",color:"#ef4444",num:"#001"},
+{id:2,pkg:"com.helldivers2.mobile",name:"HELLDIVERS 2",path:"helldivers.com/drop",icon:"💥",sub:"CO-OP SHOOTER",status:"LIVE",color:"#ec4899",num:"#002"},
+{id:3,pkg:"com.lethalcompany.mobile",name:"LETHAL COMPANY",path:"lethalgame.com/lobby",icon:"👾",sub:"HORROR COOP",status:"NEW",color:"#06b6d4",num:"#003"},
+{id:4,pkg:"com.contentwarning.game",name:"CONTENT WARNING",path:"contentwarning.com/record",icon:"📹",sub:"VIRAL HORROR",status:"SYNC",color:"#f97316",num:"#004"},
+{id:5,pkg:"com.santamonica.gowragnarok",name:"GOD OF WAR RAGNAROK",path:"godofwar.playstation.com/ragnarok",icon:"🪓",sub:"ACTION EPIC",status:"100%",color:"#a855f7",num:"#005"},
+{id:6,pkg:"com.polyphony.gran7",name:"GRAN TURISMO 7",path:"granturismo.com/gt7",icon:"🏁",sub:"SIM RACER",status:"READY",color:"#3b82f6",num:"#006"},
+{id:7,pkg:"com.larian.baldursgate3",name:"BALDURS GATE 3",path:"baldursgate3.game/start",icon:"🐉",sub:"RPG MASTER",status:"PLAYED",color:"#facc15",num:"#007"},
+{id:8,pkg:"com.fromsoftware.eldenring",name:"ELDEN RING",path:"eldenring.com/begin",icon:"💍",sub:"SOULS OPEN",status:"100%",color:"#a855f7",num:"#008"},
+{id:9,pkg:"com.cdprojekt.cyberpunk2077",name:"CYBERPUNK 2077",path:"cyberpunk.net/nightcity",icon:"🌃",sub:"FUTURE RPG",status:"ACTIVE",color:"#ef4444",num:"#009"},
+{id:10,pkg:"com.activision.codmw3",name:"CALL OF DUTY MW3",path:"callofduty.com/mw3",icon:"🔫",sub:"FPS WAR",status:"LIVE",color:"#ec4899",num:"#010"},
+{id:11,pkg:"com.epic.fortnite",name:"FORTNITE",path:"fortnite.com/battle",icon:"🌀",sub:"BATTLE ROYALE",status:"READY",color:"#3b82f6",num:"#011"},
+{id:12,pkg:"com.ea.apexlegends",name:"APEX LEGENDS",path:"apexlegends.com/drop",icon:"🎯",sub:"HERO SHOOTER",status:"PLAYED",color:"#facc15",num:"#012"},
+{id:13,pkg:"com.riot.valorant",name:"VALORANT",path:"valorant.com/play",icon:"⚡",sub:"TACTICAL FPS",status:"NEW",color:"#06b6d4",num:"#013"},
+{id:14,pkg:"com.mojang.minecraft",name:"MINECRAFT",path:"minecraft.net/world",icon:"⛏️",sub:"SANDBOX",status:"100%",color:"#a855f7",num:"#014"},
+{id:15,pkg:"com.roblox.client",name:"ROBLOX",path:"roblox.com/home",icon:"🧱",sub:"UGC PLATFORM",status:"SYNC",color:"#f97316",num:"#015"},
+{id:16,pkg:"com.rockstar.gta5",name:"GTA V",path:"rockstargames.com/gta5",icon:"🚗",sub:"OPEN WORLD",status:"ACTIVE",color:"#ef4444",num:"#016"},
+{id:17,pkg:"com.rockstar.rdr2",name:"RED DEAD REDEMPTION 2",path:"rockstargames.com/rdr2",icon:"🤠",sub:"WESTERN EPIC",status:"READY",color:"#3b82f6",num:"#017"},
+{id:18,pkg:"com.cdprojekt.witcher3",name:"THE WITCHER 3",path:"witcher.com/wildhunt",icon:"🐺",sub:"RPG LEGEND",status:"PLAYED",color:"#facc15",num:"#018"},
+{id:19,pkg:"com.wbgames.hogwarts",name:"HOGWARTS LEGACY",path:"hogwartslegacy.com/play",icon:"🪄",sub:"WIZARD RPG",status:"NEW",color:"#06b6d4",num:"#019"},
+{id:20,pkg:"com.bethesda.starfield",name:"STARFIELD",path:"starfield.com/space",icon:"🚀",sub:"SPACE RPG",status:"SYNC",color:"#f97316",num:"#020"},
+{id:21,pkg:"com.blizzard.diablo4",name:"DIABLO 4",path:"diablo4.blizzard.com",icon:"😈",sub:"ARPG",status:"LIVE",color:"#ec4899",num:"#021"},
+{id:22,pkg:"com.capcom.re4",name:"RESIDENT EVIL 4",path:"residentevil.com/re4",icon:"🧟",sub:"SURVIVAL HORROR",status:"100%",color:"#a855f7",num:"#022"},
+{id:23,pkg:"com.ea.deadspace",name:"DEAD SPACE",path:"ea.com/deadspace",icon:"👨‍🚀",sub:"SCI-FI HORROR",status:"ACTIVE",color:"#ef4444",num:"#023"},
+{id:24,pkg:"com.naughty.theloup2",name:"THE LAST OF US 2",path:"lastofus.com/part2",icon:"🍄",sub:"STORY DRIVEN",status:"PLAYED",color:"#facc15",num:"#024"},
+{id:25,pkg:"com.insomniac.spider2",name:"SPIDER-MAN 2",path:"spiderman.playstation.com/2",icon:"🕷️",sub:"SUPERHERO",status:"READY",color:"#3b82f6",num:"#025"},
+{id:26,pkg:"com.santa.ragnarok.mobile",name:"GOD OF WAR 2018",path:"godofwar.com/2018",icon:"🔨",sub:"MYTH ACTION",status:"NEW",color:"#06b6d4",num:"#026"},
+{id:27,pkg:"com.fromsoft.sekiro",name:"SEKIRO",path:"sekiro.com/shadows",icon:"🥷",sub:"HARDCORE",status:"100%",color:"#a855f7",num:"#027"},
+{id:28,pkg:"com.fromsoft.dark3",name:"DARK SOULS 3",path:"darksouls3.com/ember",icon:"🔥",sub:"SOULS",status:"SYNC",color:"#f97316",num:"#028"},
+{id:29,pkg:"com.helldivers.hd1",name:"HELLDIVERS",path:"helldivers.com/original",icon:"🪖",sub:"TOP DOWN",status:"PLAYED",color:"#facc15",num:"#029"},
+{id:30,pkg:"com.arrowhead.hellpod",name:"HELLDIVERS POD",path:"helldivers.com/pod",icon:"🛸",sub:"DROP SIM",status:"LIVE",color:"#ec4899",num:"#030"},
+{id:31,pkg:"com.zeekerss.lethal",name:"LETHAL COMPANY MOD",path:"lethalcompany.com/modded",icon:"🏭",sub:"SCRAP RUN",status:"ACTIVE",color:"#ef4444",num:"#031"},
+{id:32,pkg:"com.landfall.content",name:"CONTENT WARNING PRO",path:"contentwarning.com/pro",icon:"🎬",sub:"SPOOKTUBE",status:"NEW",color:"#06b6d4",num:"#032"},
+{id:33,pkg:"com.pocketpair.pal",name:"PALWORLD POCKET",path:"palworld.com/pocket",icon:"🥚",sub:"MONSTER TAMER",status:"READY",color:"#3b82f6",num:"#033"},
+{id:34,pkg:"com.gtavice.city",name:"GTA VICE CITY",path:"rockstar.com/vice",icon:"🌴",sub:"CLASSIC",status:"PLAYED",color:"#facc15",num:"#034"},
+{id:35,pkg:"com.sanandreas.gta",name:"GTA SAN ANDREAS",path:"rockstar.com/sa",icon:"🚲",sub:"OPEN WORLD",status:"100%",color:"#a855f7",num:"#035"},
+{id:36,pkg:"com.baldur.gate2",name:"BALDURS GATE 2",path:"baldursgate.com/2",icon:"⚔️",sub:"CRPG",status:"SYNC",color:"#f97316",num:"#036"},
+{id:37,pkg:"com.elden.nightreign",name:"ELDEN RING NIGHTREIGN",path:"eldenring.com/night",icon:"🌙",sub:"ROGUE SOULS",status:"NEW",color:"#06b6d4",num:"#037"},
+{id:38,pkg:"com.cyber.edge",name:"CYBERPUNK EDGERUNNERS",path:"cyberpunk.com/edge",icon:"🦾",sub:"ANIME DLC",status:"ACTIVE",color:"#ef4444",num:"#038"},
+{id:39,pkg:"com.hogwarts.quidditch",name:"QUIDDITCH CHAMPIONS",path:"quidditch.com/champ",icon:"🧹",sub:"SPORT MAGIC",status:"LIVE",color:"#ec4899",num:"#039"},
+{id:40,pkg:"com.starfield.shattered",name:"STARFIELD SHATTERED SPACE",path:"starfield.com/shattered",icon:"🌌",sub:"EXPANSION",status:"READY",color:"#3b82f6",num:"#040"},
+{id:41,pkg:"com.diablo.immortal",name:"DIABLO IMMORTAL",path:"diabloimmortal.com",icon:"💀",sub:"MOBILE ARPG",status:"PLAYED",color:"#facc15",num:"#041"},
+{id:42,pkg:"com.re4.separate",name:"RE4 SEPARATE WAYS",path:"residentevil.com/separate",icon:"🗡️",sub:"DLC",status:"100%",color:"#a855f7",num:"#042"},
+{id:43,pkg:"com.dead.island2",name:"DEAD ISLAND 2",path:"deadisland.com/2",icon:"🏝️",sub:"ZOMBIE",status:"SYNC",color:"#f97316",num:"#043"},
+{id:44,pkg:"com.liesof.p",name:"LIES OF P",path:"liesofp.com/puppet",icon:"🤥",sub:"SOULS PINOCCHIO",status:"NEW",color:"#06b6d4",num:"#044"},
+{id:45,pkg:"com.armored.core6",name:"ARMORED CORE 6",path:"armoredcore.com/6",icon:"🤖",sub:"MECH COMBAT",status:"ACTIVE",color:"#ef4444",num:"#045"},
+{id:46,pkg:"com.baldurs.darkurge",name:"BALDURS GATE DARK URGE",path:"baldursgate3.com/dark",icon:"🩸",sub:"EVIL RUN",status:"LIVE",color:"#ec4899",num:"#046"},
+{id:47,pkg:"com.helldivers.super",name:"HELLDIVERS SUPER EARTH",path:"helldivers.com/super",icon:"🌍",sub:"PROPAGANDA",status:"READY",color:"#3b82f6",num:"#047"},
+{id:48,pkg:"com.palworld.breeding",name:"PALWORLD BREEDING",path:"palworld.com/breed",icon:"🧬",sub:"GENETICS",status:"PLAYED",color:"#facc15",num:"#048"},
+{id:49,pkg:"com.lethal.moons",name:"LETHAL COMPANY MOONS",path:"lethalcompany.com/moons",icon:"🌕",sub:"NEW MOONS",status:"100%",color:"#a855f7",num:"#049"},
+{id:50,pkg:"com.content.oldworld",name:"CONTENT WARNING OLD WORLD",path:"contentwarning.com/old",icon:"🏚️",sub:"DEEP DIVE",status:"SYNC",color:"#f97316",num:"#050"},
+{id:51,pkg:"com.gow.valhalla",name:"GOD OF WAR VALHALLA",path:"godofwar.com/valhalla",icon:"⚡",sub:"ROGUE MODE",status:"NEW",color:"#06b6d4",num:"#051"},
+{id:52,pkg:"com.gt7.vr",name:"GRAN TURISMO VR",path:"granturismo.com/vr",icon:"🥽",sub:"PSVR2",status:"ACTIVE",color:"#ef4444",num:"#052"},
+{id:53,pkg:"com.elden.shadow",name:"ELDEN RING SHADOW",path:"eldenring.com/shadow",icon:"🌑",sub:"ERDTREE",status:"LIVE",color:"#ec4899",num:"#053"},
+{id:54,pkg:"com.cod.warzone",name:"WARZONE 3",path:"warzone.com/3",icon:"💣",sub:"BR",status:"READY",color:"#3b82f6",num:"#054"},
+{id:55,pkg:"com.fortnite.lego",name:"FORTNITE LEGO",path:"fortnite.com/lego",icon:"🔷",sub:"SURVIVAL",status:"PLAYED",color:"#facc15",num:"#055"},
+{id:56,pkg:"com.minecraft.dungeons",name:"MINECRAFT DUNGEONS",path:"minecraft.com/dungeons",icon:"🏹",sub:"ARPG",status:"100%",color:"#a855f7",num:"#056"},
+{id:57,pkg:"com.roblox.bedwars",name:"ROBLOX BEDWARS",path:"roblox.com/bedwars",icon:"🛏️",sub:"PVP",status:"SYNC",color:"#f97316",num:"#057"},
+{id:58,pkg:"com.gta.online",name:"GTA ONLINE",path:"gtaonline.com",icon:"💵",sub:"MULTIPLAYER",status:"NEW",color:"#06b6d4",num:"#058"},
+{id:59,pkg:"com.rdr.online",name:"RDR ONLINE",path:"rdr2online.com",icon:"🐴",sub:"FRONTIER",status:"ACTIVE",color:"#ef4444",num:"#059"},
+{id:60,pkg:"com.witcher.gwent",name:"GWENT",path:"playgwent.com",icon:"🃏",sub:"CARD GAME",status:"LIVE",color:"#ec4899",num:"#060"},
+{id:61,pkg:"com.hogwarts.magic",name:"HOGWARTS MAGIC AWAKENED",path:"magicawakened.com",icon:"📖",sub:"CARD RPG",status:"READY",color:"#3b82f6",num:"#061"},
+{id:62,pkg:"com.starfield.constellation",name:"CONSTELLATION EDITION",path:"starfield.com/constellation",icon:"⭐",sub:"COLLECTOR",status:"PLAYED",color:"#facc15",num:"#062"},
+{id:63,pkg:"com.diablo.helltides",name:"DIABLO HELLTIDES",path:"diablo4.com/helltide",icon:"🌋",sub:"EVENT",status:"100%",color:"#a855f7",num:"#063"},
+{id:64,pkg:"com.re2.remake",name:"RESIDENT EVIL 2",path:"residentevil.com/re2",icon:"👮",sub:"REMAKE",status:"SYNC",color:"#f97316",num:"#064"},
+{id:65,pkg:"com.re3.remake",name:"RESIDENT EVIL 3",path:"residentevil.com/re3",icon:"🧪",sub:"REMAKE",status:"NEW",color:"#06b6d4",num:"#065"},
+{id:66,pkg:"com.dead.space2",name:"DEAD SPACE 2",path:"deadspace.com/2",icon:"🔧",sub:"CLASSIC",status:"ACTIVE",color:"#ef4444",num:"#066"},
+{id:67,pkg:"com.tlou.part1",name:"THE LAST OF US PART 1",path:"lastofus.com/part1",icon:"🌿",sub:"REMAKE",status:"LIVE",color:"#ec4899",num:"#067"},
+{id:68,pkg:"com.spider.miles",name:"SPIDER-MAN MILES MORALES",path:"spiderman.com/miles",icon:"🕸️",sub:"SPIN OFF",status:"READY",color:"#3b82f6",num:"#068"},
+{id:69,pkg:"com.ghost.tsushima",name:"GHOST OF TSUSHIMA",path:"ghostoftsushima.com",icon:"🎌",sub:"SAMURAI",status:"PLAYED",color:"#facc15",num:"#069"},
+{id:70,pkg:"com.horizon.forbidden",name:"HORIZON FORBIDDEN WEST",path:"horizon.com/forbidden",icon:"🦖",sub:"OPEN WORLD",status:"100%",color:"#a855f7",num:"#070"},
+{id:71,pkg:"com.returnal.game",name:"RETURNAL",path:"returnal.com/loop",icon:"🔄",sub:"ROGUE",status:"SYNC",color:"#f97316",num:"#071"},
+{id:72,pkg:"com.demon.souls",name:"DEMONS SOULS",path:"demonsouls.com/remake",icon:"👹",sub:"REMAKE",status:"NEW",color:"#06b6d4",num:"#072"},
+{id:73,pkg:"com.ratchet.rift",name:"RATCHET & CLANK RIFT",path:"ratchet.com/rift",icon:"🔧",sub:"PLATFORMER",status:"ACTIVE",color:"#ef4444",num:"#073"},
+{id:74,pkg:"com.sackboy.adventure",name:"SACKBOY ADVENTURE",path:"sackboy.com/big",icon:"🧶",sub:"COOP",status:"LIVE",color:"#ec4899",num:"#074"},
+{id:75,pkg:"com.astro.bot",name:"ASTRO BOT",path:"astrobot.com/rescue",icon:"🤖",sub:"PLATFORM",status:"READY",color:"#3b82f6",num:"#075"},
+{id:76,pkg:"com.bloodborne.game",name:"BLOODBORNE",path:"bloodborne.com/hunt",icon:"🩸",sub:"SOULS",status:"PLAYED",color:"#facc15",num:"#076"},
+{id:77,pkg:"com.helldivers2.terminids",name:"HELLDIVERS TERMINIDS",path:"helldivers.com/bugs",icon:"🐛",sub:"ENEMY",status:"100%",color:"#a855f7",num:"#077"},
+{id:78,pkg:"com.palworld.raid",name:"PALWORLD RAID",path:"palworld.com/raid",icon:"⚔️",sub:"BOSS",status:"SYNC",color:"#f97316",num:"#078"},
+{id:79,pkg:"com.lethal.mimic",name:"LETHAL MIMIC UPDATE",path:"lethalcompany.com/mimic",icon:"🤡",sub:"MIMIC",status:"NEW",color:"#06b6d4",num:"#079"},
+{id:80,pkg:"com.content.island",name:"CONTENT WARNING ISLAND",path:"contentwarning.com/island",icon:"🏝️",sub:"NEW MAP",status:"ACTIVE",color:"#ef4444",num:"#080"},
+{id:81,pkg:"com.gow.newgame",name:"GOD OF WAR NEW GAME+",path:"godofwar.com/ngplus",icon:"♻️",sub:"REPLAY",status:"LIVE",color:"#ec4899",num:"#081"},
+{id:82,pkg:"com.gt7.legend",name:"GT7 LEGEND CARS",path:"granturismo.com/legend",icon:"🏎️",sub:"DEALER",status:"READY",color:"#3b82f6",num:"#082"},
+{id:83,pkg:"com.baldurs.honor",name:"BALDURS HONOR MODE",path:"baldursgate3.com/honor",icon:"🏆",sub:"HARDCORE",status:"PLAYED",color:"#facc15",num:"#083"},
+{id:84,pkg:"com.elden.pvp",name:"ELDEN RING COLOSSEUM",path:"eldenring.com/colosseum",icon:"🏛️",sub:"PVP",status:"100%",color:"#a855f7",num:"#084"},
+{id:85,pkg:"com.codbp.season",name:"COD SEASON 4",path:"callofduty.com/season4",icon:"🎖️",sub:"BATTLEPASS",status:"SYNC",color:"#f97316",num:"#085"},
+{id:86,pkg:"com.fortnite.festival",name:"FORTNITE FESTIVAL",path:"fortnite.com/festival",icon:"🎸",sub:"RHYTHM",status:"NEW",color:"#06b6d4",num:"#086"},
+{id:87,pkg:"com.apex.neon",name:"APEX NEON NETWORK",path:"apex.com/neon",icon:"🌐",sub:"EVENT",status:"ACTIVE",color:"#ef4444",num:"#087"},
+{id:88,pkg:"com.val.champions",name:"VALORANT CHAMPIONS",path:"valorant.com/champions",icon:"👑",sub:"ESPORTS",status:"LIVE",color:"#ec4899",num:"#088"},
+{id:89,pkg:"com.minecraft.legends",name:"MINECRAFT LEGENDS",path:"minecraft.com/legends",icon:"🗡️",sub:"STRATEGY",status:"READY",color:"#3b82f6",num:"#089"},
+{id:90,pkg:"com.roblox.doors",name:"ROBLOX DOORS",path:"roblox.com/doors",icon:"🚪",sub:"HORROR",status:"PLAYED",color:"#facc15",num:"#090"},
+{id:91,pkg:"com.gta.trilogy",name:"GTA TRILOGY",path:"rockstar.com/trilogy",icon:"📀",sub:"REMASTER",status:"100%",color:"#a855f7",num:"#091"},
+{id:92,pkg:"com.rdr.undead",name:"RDR UNDEAD NIGHTMARE",path:"rdr.com/undead",icon:"🧟",sub:"ZOMBIE DLC",status:"SYNC",color:"#f97316",num:"#092"},
+{id:93,pkg:"com.witcher.nextgen",name:"WITCHER NEXT-GEN",path:"witcher.com/nextgen",icon:"✨",sub:"UPDATE",status:"NEW",color:"#06b6d4",num:"#093"},
+{id:94,pkg:"com.hogwarts.summer",name:"HOGWARTS SUMMER UPDATE",path:"hogwarts.com/summer",icon:"☀️",sub:"SEASON",status:"ACTIVE",color:"#ef4444",num:"#094"},
+{id:95,pkg:"com.starfield.crimson",name:"STARFIELD CRIMSON FLEET",path:"starfield.com/crimson",icon:"🏴‍☠️",sub:"FACTION",status:"LIVE",color:"#ec4899",num:"#095"},
+{id:96,pkg:"com.diablo.vessel",name:"DIABLO VESSEL OF HATRED",path:"diablo4.com/vessel",icon:"🌿",sub:"EXPANSION",status:"READY",color:"#3b82f6",num:"#096"},
+{id:97,pkg:"com.re4.mercenaries",name:"RE4 MERCENARIES",path:"residentevil.com/mercs",icon:"🎯",sub:"ARCADE",status:"PLAYED",color:"#facc15",num:"#097"},
+{id:98,pkg:"com.dead.rebuilt",name:"DEAD SPACE REBUILT",path:"deadspace.com/rebuilt",icon:"🛠️",sub:"REMAKE+",status:"100%",color:"#a855f7",num:"#098"},
+{id:99,pkg:"com.liesoverture.p",name:"LIES OF P OVERTURE",path:"liesofp.com/overture",icon:"🎭",sub:"DLC",status:"SYNC",color:"#f97316",num:"#099"},
+{id:100,pkg:"com.helldivers2.mechs",name:"HELLDIVERS 2 MECHS",path:"helldivers.com/mechs",icon:"🦾",sub:"STRATAGEM",status:"NEW",color:"#06b6d4",num:"#100"},
+{id:101,pkg:"com.palworld.feybreak",name:"PALWORLD FEYBREAK",path:"palworld.com/feybreak",icon:"🧚",sub:"UPDATE",status:"ACTIVE",color:"#ef4444",num:"#101"},
+{id:102,pkg:"com.lethal.v70",name:"LETHAL COMPANY V70",path:"lethalcompany.com/v70",icon:"📦",sub:"UPDATE",status:"LIVE",color:"#ec4899",num:"#102"},
+{id:103,pkg:"com.elden.er",name:"ELDEN RING II CONCEPT",path:"eldenring.com/concept",icon:"🔮",sub:"LEAK",status:"READY",color:"#3b82f6",num:"#103"},
+{id:104,pkg:"com.baldur.patch6",name:"BALDURS GATE PATCH 6",path:"baldursgate3.com/patch6",icon:"🛠️",sub:"PATCH",status:"PLAYED",color:"#facc15",num:"#104"},
+{id:105,pkg:"com.cod.zombies",name:"COD ZOMBIES",path:"callofduty.com/zombies",icon:"🧠",sub:"HORDE",status:"SYNC",color:"#f97316",num:"#105"}
+];
+
+let currentPkg="", currentPath="", currentName="", currentId=0;
+
+function renderGames(list){
+  const grid=document.getElementById('gamesGrid');
+  grid.innerHTML="";
+  list.forEach(g=>{
+    const div=document.createElement('div');
+    div.className='card';
+    div.style.borderBottom='3px solid '+g.color;
+    div.innerHTML = `
+      <div class="card-top">
+        <div class="status-left"><div class="dot" style="background:${g.color}"></div><span style="color:${g.color}">${g.status}</span></div>
+        <div class="num">${g.num}</div>
+      </div>
+      <div class="icon-wrap"><div class="icon-circle">${g.icon}</div></div>
+      <div class="card-title">${g.name}</div>
+      <div class="card-sub">${g.sub}</div>
+      <div class="card-bottom"><div class="open">OPEN →</div><div class="arrow" style="background:${g.color}">→</div></div>
+    `;
+    div.onclick=()=>launchGame(g.id,g.pkg,g.name,g.path);
+    grid.appendChild(div);
+  });
+}
+
+function switchTab(name,btn){
+  document.getElementById('page-reactor').style.display = name==='reactor' ? 'block' : 'none';
+  document.getElementById('page-library').style.display = name==='library' ? 'block' : 'none';
+  document.getElementById('page-system').style.display = name==='system' ? 'block' : 'none';
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+function launchGame(id,pkg,name,path){
+  currentId=id; currentPkg=pkg; currentName=name; currentPath=path;
+  showToast('LAUNCHING '+name+'...');
+  try{
+    const a=document.createElement('a');
+    a.href='intent://'+path+'#Intent;package='+pkg+';scheme=https;end';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{ try{document.body.removeChild(a)}catch(e){} },1000);
+  }catch(e){}
+  setTimeout(()=>{ showLaunchModal(id,pkg,name,path); },900);
+}
+
+function showLaunchModal(id,pkg,name,path){
+  document.getElementById('modalTitle').textContent=name;
+  document.getElementById('modalSub').textContent=path+' • '+pkg;
+  document.getElementById('launchModal').classList.add('show');
+}
+
+function closeModal(){ document.getElementById('launchModal').classList.remove('show'); }
+
+function openApp(){
+  try{
+    const a=document.createElement('a');
+    a.href='intent://'+currentPath+'#Intent;package='+currentPkg+';scheme=https;end';
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{ try{document.body.removeChild(a)}catch(e){} },1000);
+  }catch(e){}
+}
+
+function copyPath(){
+  const txt=currentPath;
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(()=>showToast('COPIED PATH')); }
+  else{
+    const ta=document.createElement('textarea'); ta.value=txt; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); showToast('COPIED PATH');
+  }
+}
+
+function openStore(){ window.open('https://play.google.com/store/apps/details?id='+currentPkg,'_blank'); }
+
+document.getElementById('searchInput')?.addEventListener('input',function(e){
+  const q=e.target.value.toLowerCase();
+  const filtered=games.filter(g=>g.name.toLowerCase().includes(q) || g.sub.toLowerCase().includes(q));
+  renderGames(filtered);
+});
+
+document.getElementById('launchModal')?.addEventListener('click',function(e){ if(e.target===this) closeModal(); });
+
+renderGames(games);
+</script>
+</body>
+</html>
