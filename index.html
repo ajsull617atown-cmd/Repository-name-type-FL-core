@@ -1,83 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FL-CORE LIBRARY - Factory Line Gaming</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#050506;color:#fff;font-family:-apple-system,Segoe UI,Roboto,sans-serif}
-.header{background:#000;border-bottom:1px solid #1a1a1a;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:20}
-.logo{width:46px;height:46px;background:radial-gradient(circle at 30% 30%,#ff6a6a,#ff1515 60%,#a00000);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;box-shadow:0 0 20px rgba(255,21,21,0.6);border:2px solid #ff3333}
-.brand{font-weight:900;letter-spacing:2px;font-size:18px}
-.sub{font-size:11px;color:#888;letter-spacing:1.2px}
-.live{margin-left:auto;text-align:right}
-.live b{color:#ff2a2a;font-size:13px}
-.hero{text-align:center;padding:28px 16px 18px;background:radial-gradient(700px 320px at 50% -20%, rgba(255,21,21,0.20), transparent 70%)}
-.hero h1{font-size:42px;font-weight:900;letter-spacing:3px;line-height:0.95}
-.hero p{color:#777;font-size:14px;margin:14px 0 22px}
-.try-btn{display:inline-block;background:#ff1515;color:#fff;font-weight:900;font-size:22px;padding:18px 44px;border-radius:16px;text-decoration:none;box-shadow:0 12px 40px rgba(255,21,21,0.5);min-width:280px}
-.hint{color:#555;font-size:13px;margin-top:16px}
-.search-wrap{padding:16px;background:#050506}
-.search{width:100%;background:#101010;border:1px solid #222;border-radius:14px;padding:16px 18px;color:#fff;font-size:15px;outline:none}
-.stats{padding:0 16px 12px;font-size:13px;color:#666;display:flex;gap:8px}
-.stats b{color:#ff4444}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 12px 40px}
-.card{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:18px;overflow:hidden;cursor:pointer}
-.card-top{aspect-ratio:1.1;background:#080808;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:center;font-size:44px}
-.card-bottom{padding:12px}
-.card-title{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.card-meta{display:flex;justify-content:space-between;margin-top:8px;align-items:center}
-.badge-live{background:rgba(255,21,21,0.12);border:1px solid rgba(255,21,21,0.3);color:#ff5555;padding:4px 8px;border-radius:8px;font-size:11px;font-weight:700}
-.badge-type{color:#555;font-size:12px}
-.telemetry{display:flex;gap:8px;padding:10px 16px;background:#0a0a0a;border-bottom:1px solid #161616;overflow-x:auto;font-size:11px;color:#888}
-.telemetry span{background:#121212;border:1px solid #222;padding:4px 8px;border-radius:8px;white-space:nowrap}
-.nav{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;border-bottom:1px solid #1a1a1a}
-.nav button{background:#121212;border:1px solid #222;color:#aaa;padding:8px 14px;border-radius:20px;font-size:12px;font-weight:700}
-.nav button.active{background:#ff1515;color:#fff;border-color:#ff1515}
-</style>
-</head>
-<body>
-<div class="header"><div class="logo">FL</div><div><div class="brand">FL-CORE</div><div class="sub">FACTORY LINE GAMING</div></div><div class="live"><b>● LIVE</b><div>300+ APPS</div></div></div>
-<div class="telemetry"><span><b>CPU</b> 54°C</span><span><b>GPU</b> 61°C</span><span><b>FAN</b> 2227 RPM</span><span><b>BAT</b> 87%</span><span><b>MEM</b> 6.4GB</span><span><b>PING</b> 24ms</span><span><b>STEAM</b> 342 ONLINE</span></div>
-<div class="hero"><h1>FL-CORE<br>LIBRARY</h1><p>Photoreal Reactor • Instant Launch via GitHub •<br>No Download</p><a class="try-btn" href="#" onclick="scanROMsUI();return false;">▶ TRY IT NOW</a><div class="hint">Tap any app below → opens straight through GitHub Pages</div></div>
-<div class="nav" id="sysNav"></div>
-<div class="search-wrap"><input id="search" class="search" placeholder="🔍 Search 300+ games, apps, builds..." oninput="render()"></div>
-<div class="stats"><span id="count">Showing 312 builds</span><span>•</span><b>Red = Instant Launch</b></div>
-<div class="grid" id="grid"></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>FL-CORE OS</title><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#050506;color:#fff;font-family:sans-serif}.header{background:#000;border-bottom:1px solid #1a1a1a;padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:30}.logo{width:46px;height:46px;background:radial-gradient(circle at 30% 30%,#ff6a6a,#ff1515 60%,#a00000);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;box-shadow:0 0 20px rgba(255,21,21,.6);border:2px solid #ff3333}.tabs{display:flex;gap:8px;padding:12px;background:#070708;border-bottom:1px solid #1a1a1a;position:sticky;top:62px;z-index:20}.tabs button{background:#121212;border:1px solid #222;color:#aaa;padding:10px 18px;border-radius:20px;font-weight:800}.tabs button.active{background:#ff1515;color:#fff;border-color:#ff1515}.page{display:none}.page.active{display:block}.hero{text-align:center;padding:40px 16px}.hero h1{font-size:42px;font-weight:900;letter-spacing:3px}.hero p{color:#777;margin:12px 0 22px}.try{ background:#ff1515;color:#fff;font-weight:900;font-size:22px;padding:18px 44px;border-radius:16px;border:none;box-shadow:0 12px 40px rgba(255,21,21,.5);min-width:280px}.reactor{width:220px;height:220px;margin:20px auto;background:radial-gradient(circle at 30% 30%,#ff8a8a,#ff1515 40%,#600000);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:80px;font-weight:900;box-shadow:0 0 80px rgba(255,21,21,.6),0 0 0 12px rgba(255,21,21,.1);animation:pulse 2s infinite}@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}.telemetry{display:flex;gap:8px;padding:10px 16px;background:#0a0a0a;overflow-x:auto;font-size:11px}.telemetry span{background:#121212;border:1px solid #222;padding:6px 10px;border-radius:8px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px}.card{background:#0f0f0f;border:1px solid #1e1e1e;border-radius:18px;overflow:hidden}.card-top{aspect-ratio:1.1;background:#080808;display:flex;align-items:center;justify-content:center;font-size:44px}.card-bottom{padding:12px}.search{width:100%;background:#101010;border:1px solid #222;border-radius:14px;padding:16px 18px;color:#fff;margin:12px 16px;width:calc(100% - 32px)}</style></head><body>
+<div class="header"><div class="logo">FL</div><div><div style="font-weight:900;letter-spacing:2px">FL-CORE</div><div style="font-size:11px;color:#888">FACTORY LINE GAMING</div></div><div style="margin-left:auto;text-align:right"><b style="color:#ff2a2a">● LIVE</b><div style="font-size:10px;color:#555">300+ APPS</div></div></div>
+<div class="tabs"><button id="t1" class="active" onclick="show('reactor')">REACTOR</button><button id="t2" onclick="show('library')">LIBRARY</button><button id="t3" onclick="show('builds')">BUILDS</button></div>
+
+<div id="reactor" class="page active"><div class="hero"><div class="reactor">FL</div><h1>FL-CORE<br>REACTOR</h1><p>Photoreal Diagnosis • Live Telemetry • Factory Line OS</p><button class="try" onclick="show('library')">▶ ENTER LIBRARY</button></div><div class="telemetry"><span><b>CPU</b> 54°C</span><span><b>GPU</b> 61°C</span><span><b>FAN</b> 2227 RPM</span><span><b>BAT</b> 87%</span><span><b>MEM</b> 6.4GB</span><span><b>PING</b> 24ms</span><span><b>STEAM</b> 342 ONLINE</span></div><div style="padding:16px;color:#666;font-size:13px;text-align:center">Diagnosis: Core Online • Reactor Stable • All Vaults Linked • Ready for Instant Launch via GitHub Pages • No Download</div></div>
+
+<div id="library" class="page"><div class="hero" style="padding:28px 16px 18px"><h1>FL-CORE<br>LIBRARY</h1><p>Photoreal Reactor • Instant Launch via GitHub • No Download</p><button class="try" onclick="scanROMsUI()">▶ TRY IT NOW</button><div style="color:#555;font-size:13px;margin-top:16px">Tap any app below → opens straight through GitHub Pages</div></div><input id="search" class="search" placeholder="🔍 Search 300+ games, apps, builds..." oninput="render()"><div style="padding:0 16px 12px;font-size:13px;color:#666;display:flex;gap:8px"><span id="count">Showing 312 builds</span><span>•</span><b style="color:#ff4444">Red = Instant Launch</b></div><div class="grid" id="grid"></div></div>
+
+<div id="builds" class="page"><div class="hero"><h1>FL-CORE<br>BUILDS</h1><p>Factory Red • PS5 Trace • Switch Hybrid • Neon • Cyberpunk</p></div><div class="grid"><div class="card"><div class="card-top" style="background:#ff1515">🔴</div><div class="card-bottom">Factory Red (Active)</div></div><div class="card"><div class="card-top">🎮</div><div class="card-bottom">PS5 Trace</div></div><div class="card"><div class="card-top">⚡</div><div class="card-bottom">Switch Hybrid</div></div><div class="card"><div class="card-top">🌈</div><div class="card-bottom">Neon Cyberpunk</div></div></div></div>
+
 <script>
-const EMULATORS = {
-  PSP: { name: "PPSSPP", package: "org.ppsspp.ppsspp", extensions: [".iso", ".cso", ".pbp"] },
-  PS2: { name: "AetherSX2", package: "xyz.aethersx2.android", extensions: [".iso", ".bin"] },
-  GC: { name: "Dolphin", package: "org.dolphinemu.dolphinemu", extensions: [".iso", ".gcz"] },
-  WII: { name: "Dolphin", package: "org.dolphinemu.dolphinemu", extensions: [".iso", ".wbfs"] },
-  PS1: { name: "DuckStation", package: "com.github.stenzek.duckstation", extensions: [".cue", ".bin", ".chd"] },
-  GBA: { name: "RetroArch", package: "com.retroarch", extensions: [".gba"] },
-  SNES: { name: "RetroArch", package: "com.retroarch", extensions: [".sfc", ".smc"] },
-  NES: { name: "RetroArch", package: "com.retroarch", extensions: [".nes"] }
-};
-let library=[
-  {title:"FL Reactor Core",system:"Core",rom:"/ROMS/Core/FL Reactor Core.bin",emulator:"org.ppsspp.ppsspp",icon:"🔴",type:"Core"},
-  {title:"FL Photoreal Boot",system:"Boot",rom:"/ROMS/Boot/Photoreal Boot.bin",emulator:"org.dolphinemu.dolphinemu",icon:"⚡",type:"Boot"},
-  {title:"Cyberpunk 2077",system:"Android",rom:"/Games/Cyberpunk2077.apk",emulator:"android",icon:"🌃",type:"Game"},
-  {title:"Dead Cells",system:"Android",rom:"/Games/DeadCells.apk",emulator:"android",icon:"💀",type:"Game"},
-  {title:"God of War PSP",system:"PSP",rom:"/ROMS/PSP/God of War.iso",emulator:EMULATORS.PSP.package,icon:"⚔️",type:"PSP"},
-  {title:"Halo Infinite",system:"Android",rom:"/Games/Halo.apk",emulator:"android",icon:"🪖",type:"Game"},
-  {title:"Pokemon Emerald",system:"GBA",rom:"/ROMS/GBA/Pokemon Emerald.gba",emulator:EMULATORS.GBA.package,icon:"⭐",type:"GBA"},
-  {title:"Mario Kart Wii",system:"WII",rom:"/ROMS/Wii/Mario Kart Wii.wbfs",emulator:EMULATORS.WII.package,icon:"🏎️",type:"WII"}
-];
-const names=["God of War","Gran Turismo","GTA Vice City","Tekken 6","DBZ Shin Budokai","Monster Hunter","Persona 3","Shadow","Zelda","Smash Bros","Metroid","Pokemon","Castlevania","Contra","Mario World","Zelda","Final Fantasy","Crash"];
-for(let i=8;i<312;i++){const sys=Object.keys(EMULATORS)[i%Object.keys(EMULATORS).length];const ext=EMULATORS[sys].extensions[0];const name=`FL ${names[i%names.length]} ${sys} #${i}`;library.push({title:name,system:sys,rom:`/ROMS/${sys}/${name}${ext}`,emulator:EMULATORS[sys].package,icon:["🎮","🚀","🔴","⚡","🕹️","📱","💾","🎯"][i%8],type:sys});}
-library.sort((a,b)=>a.title.localeCompare(b.title));
-async function readDirectory(p){return library.filter(g=>g.rom.startsWith(p)).map(g=>({name:g.title,path:g.rom}));}
-async function scanROMs(){const folders=["/ROMS","/Games","/Download"];let out=[];for(const p of folders){const files=await readDirectory(p);files.forEach(f=>{Object.keys(EMULATORS).forEach(s=>{if(EMULATORS[s].extensions.some(e=>f.path.toLowerCase().endsWith(e))){out.push({title:f.name,system:s,rom:f.path,emulator:EMULATORS[s].package,icon:"🎮",type:s});}});});}return out.length?out:library;}
-function launchGame(g){const url=`intent://${g.rom.replace('/','')}#Intent;action=android.intent.action.VIEW;package=${g.emulator};S.browser_fallback_url=https://play.google.com/store/apps/details?id=${g.emulator};end`;try{window.location.href=url;setTimeout(()=>{if(confirm(`Launch ${g.title}? ${EMULATORS[g.system]?.name||g.emulator} ${g.rom}`))window.open(`https://play.google.com/store/apps/details?id=${g.emulator}`,'_blank');},500);}catch(e){alert(g.title);}}
-async function scanROMsUI(){document.getElementById('grid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:50px;color:#666">Scanning... Found '+library.length+' builds</div>';const f=await scanROMs();library=f;render();}
-let active="ALL";
-function setSys(s){active=s;buildNav();render();}
-function buildNav(){const sys=["ALL",...Object.keys(EMULATORS),"Android"];document.getElementById('sysNav').innerHTML=sys.map(s=>`<button class="${active===s?'active':''}" onclick="setSys('${s}')">${s}</button>`).join('');}
-function render(){const q=document.getElementById('search').value.toLowerCase();const filtered=library.filter(g=>(!q||g.title.toLowerCase().includes(q))&&(active==="ALL"||g.system===active));document.getElementById('count').textContent=`Showing ${filtered.length} builds`;document.getElementById('grid').innerHTML=filtered.slice(0,120).map(g=>`<div class="card" onclick='launchGame(${JSON.stringify(g).replace(/'/g,"&#39;")})'><div class="card-top">${g.icon}</div><div class="card-bottom"><div class="card-title">${g.title}</div><div class="card-meta"><span class="badge-live">● LIVE</span><span class="badge-type">${g.type}</span></div></div></div>`).join('');}
-buildNav();render();
-</script>
-</body>
-</html>
+const EMULATORS={PSP:{name:"PPSSPP",package:"org.ppsspp.ppsspp",ext:[".iso"]},PS2:{name:"AetherSX2",package:"xyz.aethersx2.android",ext:[".iso"]},GC:{name:"Dolphin",package:"org.dolphinemu.dolphinemu",ext:[".iso"]},WII:{name:"Dolphin",package:"org.dolphinemu.dolphinemu",ext:[".wbfs"]},GBA:{name:"RetroArch",package:"com.retroarch",ext:[".gba"]},SNES:{name:"RetroArch",package:"com.retroarch",ext:[".sfc"]},NES:{name:"RetroArch",package:"com.retroarch",ext:[".nes"]}};
+let lib=[{title:"FL Reactor Core",system:"Core",rom:"/ROMS/Core.bin",emu:"org.ppsspp.ppsspp",icon:"🔴"},{title:"FL Photoreal Boot",system:"Boot",rom:"/ROMS/Boot.bin",emu:"org.dolphinemu.dolphinemu",icon:"⚡"}];const n=["God of War","Gran Turismo","GTA","Tekken","DBZ","Monster Hunter","Persona","Zelda","Smash","Metroid","Pokemon","Castlevania","Mario","Final Fantasy"];for(let i=0;i<304;i++){let sys=Object.keys(EMULATORS)[i%7];lib.push({title:`FL ${n[i%n.length]} ${sys} #${i}`,system:sys,rom:`/ROMS/${sys}/${i}.iso`,emu:EMULATORS[sys].package,icon:"🎮"});}function show(p){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));document.getElementById(p).classList.add('active');document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));document.getElementById(p=='reactor'?'t1':p=='library'?'t2':'t3').classList.add('active');if(p=='library')render();}function render(){let q=document.getElementById('search').value.toLowerCase();let f=lib.filter(g=>!q||g.title.toLowerCase().includes(q));document.getElementById('count').innerText=`Showing ${f.length} builds`;document.getElementById('grid').innerHTML=f.slice(0,100).map(g=>`<div class="card" onclick="window.location.href='intent://${g.rom}#Intent;package=${g.emu};end'"><div class="card-top">${g.icon}</div><div class="card-bottom"><div style="font-weight:700;font-size:14px">${g.title}</div><div style="display:flex;justify-content:space-between;margin-top:8px"><span style="background:rgba(255,21,21,.12);border:1px solid rgba(255,21,21,.3);color:#ff5555;padding:4px 8px;border-radius:8px;font-size:11px">● LIVE</span><span style="color:#555;font-size:12px">${g.system}</span></div></div></div>`).join('');}function scanROMsUI(){alert('Scanning ROMS... Found '+lib.length+' builds');render();}render();
+</script></body></html>
