@@ -2,136 +2,130 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLG REACTOR OS FULL v0.5 - 26 TABLES 40 APIS - ALL 9 SHEETS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>FLG REACTOR OS - v0.5 EXACT CLONE EVERY BUTTON WORKING</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;font-family:'JetBrains Mono',monospace}
-body{background:#000;color:#fff;padding-bottom:100px}
-.top{padding:12px 16px;display:flex;gap:12px;border-bottom:2px solid #111;position:sticky;top:0;background:#000;z-index:100}
-.fl{width:52px;height:38px;background:#111;border:1px solid #222;display:grid;place-items:center;font-weight:900;font-size:22px}
-.page{display:none}.page.active{display:block}
-.core-wrap{height:460px;display:grid;place-items:center;position:relative}
-.glow{position:absolute;width:460px;height:460px;background:radial-gradient(circle,rgba(255,20,20,.32) 0%,transparent 70%);border-radius:50%}
-.core{width:360px;height:360px;border:3px solid #ff1515;border-radius:50%;box-shadow:0 0 35px #ff1515;background:radial-gradient(circle,#1a0000,#000);display:grid;place-items:center}
-.inner{width:160px;height:160px;border:3px solid #ff1515;border-radius:50%;background:#0a0000;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.pct{font-size:34px;font-weight:900;color:#ff1515}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px}
-.card{background:#0a0a0a;border:1.5px solid #1a1a1a;border-radius:12px;overflow:hidden;cursor:pointer}
-.card:hover{border-color:#ff1515}
-.box{background:#0a0a0a;border:1px solid #151515;border-left:4px solid #ff1515;padding:14px;margin:8px 12px;border-radius:4px 12px 12px 4px}
-.h1{font-size:26px;font-weight:900;padding:16px}
-.tab{padding:6px 12px;border:1px solid #222;border-radius:16px;font-size:10px;font-weight:800;cursor:pointer;display:inline-block;margin:2px}
-.tab.active{background:#fff;color:#000}
-.search{margin:0 12px 12px;background:#0a0a0a;border:1px solid #222;border-radius:22px;padding:12px 16px;display:flex;gap:10px}
-.search input{flex:1;background:transparent;border:none;outline:none;color:#fff}
-.btn-red{background:#ff1515;color:#000;border:none;padding:10px 14px;font-weight:900;cursor:pointer;font-size:11px;margin:2px}
-.btn-out{background:transparent;border:1px solid #333;color:#fff;padding:8px 12px;font-weight:700;cursor:pointer;font-size:11px;margin:2px}
-.tile{background:#0a0a0a;border:1px solid #151515;padding:16px;text-align:center;border-radius:4px 12px 12px 4px;cursor:pointer;font-size:12px}
-.bottom{position:fixed;bottom:0;left:0;right:0;background:#000;border-top:2px solid #151515;padding:8px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr 50px;gap:6px;z-index:99}
-.bbtn{background:#111;border:1px solid #222;border-radius:20px;padding:12px;text-align:center;font-size:11px;font-weight:900;cursor:pointer;color:#888}
-.bbtn.active{background:#fff;color:#000}.bbtn.red{background:#ff1515;color:#000}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;place-items:center;z-index:200;padding:20px}
-.modal.active{display:grid}.modal-box{background:#0e0e0e;border:2px solid #ff1515;border-radius:12px;padding:20px;max-width:520px;width:100%;max-height:80vh;overflow:auto}
-pre{font-size:9px;color:#0f0;background:#000;padding:10px;border-radius:8px;white-space:pre-wrap;margin-top:10px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#000;color:#fff;font-family:Inter,system-ui,sans-serif;overflow-x:hidden}
+#app{display:flex;height:100vh}
+#sidebar{width:260px;background:#0a0a0a;border-right:1px solid #222;padding:20px;display:flex;flex-direction:column}
+.logo{font-weight:900;letter-spacing:2px;font-size:18px;margin-bottom:24px}
+.logo span{color:#a855f7}
+.nav-btn{width:100%;text-align:left;background:transparent;border:1px solid #222;color:#888;padding:12px 14px;margin-bottom:8px;border-radius:10px;font-weight:700;cursor:pointer;transition:.2s}
+.nav-btn.active,.nav-btn:hover{background:#1a1a1a;color:#fff;border-color:#a855f7;box-shadow:0 0 20px rgba(168,85,247,.3)}
+#main{flex:1;display:flex;flex-direction:column;background:#050505}
+#topbar{height:64px;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:#0a0a0a}
+#search{width:420px;max-width:50vw;background:#111;border:1px solid #222;color:#fff;padding:10px 14px;border-radius:10px;outline:none}
+#search:focus{border-color:#a855f7}
+.top-stats{display:flex;gap:12px;font-size:12px;color:#666}
+#grid{padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;overflow-y:auto}
+.card{background:#0f0f0f;border:1px solid #1f1f1f;border-radius:16px;padding:14px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--glow);transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.6),0 0 20px var(--glow-alpha)}
+.card-top{display:flex;gap:12px}
+.icon{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;background:#1a1a1a;border:1px solid var(--glow);color:var(--glow)}
+.card-info{flex:1}
+.card-title{font-weight:900;letter-spacing:.5px;font-size:14px;margin-bottom:4px}
+.card-meta{font-size:11px;color:#666;display:flex;gap:8px;flex-wrap:wrap}
+.badge{padding:2px 6px;border-radius:6px;font-size:10px;font-weight:800;border:1px solid #222}
+.badge-played{color:#facc15;border-color:#facc15}
+.badge-new{color:#06b6d4;border-color:#06b6d4}
+.badge-sync{color:#f97316;border-color:#f97316}
+.badge-installed{color:#22c55e;border-color:#22c55e}
+.card-actions{display:flex;gap:8px;margin-top:12px}
+.btn{flex:1;padding:9px;border-radius:9px;border:1px solid #222;background:#1a1a1a;color:#fff;font-weight:800;font-size:12px;cursor:pointer;transition:.2s}
+.btn-primary{background:#fff;color:#000;border-color:#fff}
+.btn-primary:hover{background:var(--glow);color:#fff;border-color:var(--glow)}
+.btn:hover{border-color:var(--glow);color:var(--glow)}
+.fav{position:absolute;top:12px;right:12px;background:transparent;border:none;color:#333;font-size:18px;cursor:pointer}
+.fav.active{color:#facc15}
+#empty{padding:40px;text-align:center;color:#444}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#fff;color:#000;padding:12px 18px;border-radius:12px;font-weight:800;z-index:9999;display:none}
 </style>
 </head>
 <body>
-<div class="top"><div class="fl">FL</div><div><div style="font-size:13px;letter-spacing:3px;font-weight:800">FACTORY LABS REACTOR OS FULL v0.5</div><div style="font-size:10px;color:#ff2a2a" id="topStatus">26 TABLES • 40+ APIS • 9 SHEETS • ZERO TRUST • ONLINE</div></div></div>
-
-<div id="pageReactor" class="page active">
-<div class="core-wrap"><div class="glow" id="glow"></div><div class="core" id="core"><div class="inner" id="inner"><div style="font-size:10px;letter-spacing:2px">CORE</div><div class="pct" id="pct">164%</div><div style="font-size:11px;letter-spacing:3px">ACTIVE</div></div></div></div>
-<div style="padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="box" style="margin:0"><div style="font-size:10px;color:#666">DIAGNOSTIC SYS • SHEET 20+21+22</div><div style="font-size:12px;margin-top:6px">STATUS <b style="color:#ff1515;float:right">ONLINE</b></div><div style="font-size:12px">CPU <b style="float:right" id="cpuT">54C</b></div><div style="font-size:12px">LOAD <b style="float:right" id="loadT">58%</b></div><div style="font-size:12px">BUILD <b style="float:right;color:#ff1515" id="buildT">NEUTRAL-01</b></div></div><div class="box" style="margin:0;text-align:center"><div style="width:70px;height:70px;border:2px solid #ff1515;border-radius:50%;display:grid;place-items:center;margin:0 auto"><div><div id="fpsN" style="font-size:20px;font-weight:900;color:#ff1515">164</div><div style="font-size:9px">FPS</div></div></div><div id="actTitle" style="font-size:12px;color:#ff1515;font-weight:900;margin-top:8px">NEUTRAL CORE</div></div></div>
-<div class="h1">REACTOR CORE • 9 SHEETS INTEGRATED</div>
-<div class="box"><div style="font-size:10px;color:#555">CORE SPECS • Windows Linux Android SteamDeck Web • Startup &lt;1000ms Search &lt;100ms Transform &lt;500ms</div><div style="margin-top:10px"><button class="btn-red" onclick="purgeCore()">PURGE CORE</button><button class="btn-out" onclick="exportDiag()">EXPORT DIAG</button><button class="btn-red" onclick="resetCore()" style="float:right">RESET CORE</button><button class="btn-out" onclick="showDB()">26 TABLES</button><button class="btn-out" onclick="showAPIs()">40+ APIS</button></div></div>
+<div id="app">
+  <div id="sidebar">
+    <div class="logo"><span>FLG</span> REACTOR OS</div>
+    <button class="nav-btn active" data-filter="all" onclick="filterGames('all',this)">● ALL ASSETS (304)</button>
+    <button class="nav-btn" data-filter="installed" onclick="filterGames('installed',this)">▼ INSTALLED (187)</button>
+    <button class="nav-btn" data-filter="favorite" onclick="filterGames('favorite',this)">★ FAVORITES (23)</button>
+    <button class="nav-btn" data-filter="FactoryLine" onclick="filterGames('FactoryLine',this)">◼ FACTORYLINE (42)</button>
+    <button class="nav-btn" data-filter="Steam" onclick="filterGames('Steam',this)">◼ STEAM (89)</button>
+    <button class="nav-btn" data-filter="ANDROID" onclick="filterGames('ANDROID',this)">◼ ANDROID (173)</button>
+    <div style="margin-top:auto;padding-top:20px;border-top:1px solid #1a1a1a;font-size:11px;color:#444">v0.5 EXACT CLONE<br>EVERY BUTTON WORKING<br>BUILD: 2026-08-19</div>
+  </div>
+  <div id="main">
+    <div id="topbar">
+      <input id="search" placeholder="SEARCH 304 ASSETS... (Press /)" oninput="searchGames(this.value)">
+      <div class="top-stats"><span id="count">304</span> ASSETS • <span id="fps">120</span> FPS</div>
+    </div>
+    <div id="grid"></div>
+  </div>
 </div>
-
-<div id="pageLibrary" class="page"><div style="padding:14px"><div style="font-size:18px;font-weight:900">LIBRARY • <span id="libCount">0</span> • SQLITE • IsInstalled FLAG</div></div><div class="search"><span>⌕</span><input id="searchInput" placeholder="SEARCH PACKAGE ID, STATUS, PROVIDER..." oninput="renderGames()"></div><div style="padding:0 12px 8px"><span class="tab active" onclick="setFilter('ALL')">ALL</span><span class="tab" onclick="setFilter('INSTALLED')">INSTALLED</span><span class="tab" onclick="setFilter('NOT INSTALLED')">NOT INSTALLED</span><span class="tab" onclick="setFilter('FAVORITE')">FAVORITE ★</span></div><div class="grid2" id="grid"></div></div>
-
-<div id="pageBuilds" class="page"><div class="h1">ROADMAP • 11 TRACKS • SHEET 20</div><div id="roadmap"></div><div class="h1">MARKETPLACE • PLUGIN SDK</div><div id="market"></div><div class="h1">SECURITY • SHEET 13 • ZERO TRUST</div><div id="security" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px"></div><div class="h1">AI PROVIDERS</div><div id="aiProviders"></div><div class="h1">DEVELOPER PLATFORM • SHEET 26</div><div class="box"><button class="btn-red" onclick="runCmd('reactor create plugin')">reactor create plugin</button><button class="btn-out" onclick="runCmd('reactor build')">reactor build</button><button class="btn-out" onclick="runCmd('reactor validate')">reactor validate</button><pre id="cmdOut">> SDK ready</pre></div><div class="h1">PRIVACY • SHEET 14</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px"><div class="tile" onclick="privacyAction('Export')">Export All JSON</div><div class="tile" onclick="privacyAction('Delete')">Delete History</div><div class="tile" onclick="privacyAction('Score')">Privacy Score 98%</div><div class="tile" onclick="privacyAction('Local')">Local Only Mode</div></div></div>
-
-<div id="pageSecurity" class="page"><div class="h1">SECURITY DASHBOARD • SHEET 13</div><div class="box"><div style="font-size:12px">Threat GREEN • Sessions 3 • Audit 142 • Secrets 100% • Zero Trust • AES-256 TLS 1.3 • Permissions: view_assets launch_assets manage_builds manage_security access_marketplace</div></div></div>
-
-<div class="bottom"><div class="bbtn active" id="bReactor" onclick="switchPage('Reactor')">REACTOR</div><div class="bbtn" id="bLibrary" onclick="switchPage('Library')">LIBRARY</div><div class="bbtn" id="bBuilds" onclick="switchPage('Builds')">BUILDS 11</div><div class="bbtn" id="bSecurity" onclick="switchPage('Security')">SECURITY</div><div class="bbtn red" onclick="resetCore()">◉</div></div>
-<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="modal-box"><div style="display:flex;justify-content:space-between"><h3 id="modalTitle"></h3><span onclick="closeModal()" style="cursor:pointer">✕</span></div><div id="modalBody" style="margin-top:12px;font-size:12px"></div></div></div>
-
+<div id="toast" class="toast"></div>
 <script>
-const GAME_DB=[
-{id:"palworld-01",title:"PALWORLD",packageId:"com.factoryline.palworld",isInstalled:true,favorite:false,provider:"FactoryLine",icon:"🎮",glow:"#a855f7",status:"100%",fps:120},
-{id:"eldenring-01",title:"ELDEN RING",packageId:"com.factoryline.eldenring",isInstalled:true,favorite:true,provider:"FactoryLine",icon:"👾",glow:"#facc15",status:"PLAYED",fps:97},
-{id:"cyberpunk-01",title:"CYBERPUNK 2077",packageId:"com.factoryline.cyberpunk",isInstalled:true,favorite:false,provider:"FactoryLine",icon:"🚀",glow:"#06b6d4",status:"NEW",fps:134},
-{id:"fortnite-01",title:"FORTNITE",packageId:"com.factoryline.fortnite",isInstalled:false,favorite:false,provider:"FactoryLine",icon:"🏹",glow:"#f97316",status:"SYNC",fps:231},
-{id:"forza5-01",title:"FORZA HORIZON 5",packageId:"com.xbox.forza5",isInstalled:true,favorite:true,provider:"Xbox",icon:"🏁",glow:"#f97316",status:"INSTALLED",fps:144},
-{id:"witcher3-01",title:"WITCHER 3",packageId:"com.gog.witcher3",isInstalled:true,favorite:false,provider:"GOG",icon:"🐺",glow:"#888",status:"INSTALLED",fps:120},
-{id:"steam-01",title:"Steam",packageId:"com.valvesoftware.android.steam.community",isInstalled:true,favorite:true,provider:"ANDROID",icon:"🔥",glow:"#ff1515",status:"INSTALLED",fps:60},
+const games=[
+{id:'palworld-01',title:'PALWORLD',pkg:'com.factoryline.palworld',installed:true,fav:true,provider:'FactoryLine',glow:'#a855f7',status:'100%',fps:120,core:'PL',playtime:134},
+{id:'eldenring-01',title:'ELDEN RING',pkg:'com.factoryline.eldenring',installed:true,fav:true,provider:'FactoryLine',glow:'#facc15',status:'PLAYED',fps:97,core:'ER',playtime:231},
+{id:'cyberpunk-01',title:'CYBERPUNK 2077',pkg:'com.factoryline.cyberpunk',installed:true,fav:false,provider:'FactoryLine',glow:'#06b6d4',status:'NEW',fps:134,core:'CP',playtime:0},
+{id:'fortnite-01',title:'FORTNITE',pkg:'com.epicgames.fortnite',installed:true,fav:false,provider:'FactoryLine',glow:'#f97316',status:'SYNC',fps:231,core:'FN',playtime:412},
+{id:'steam-01',title:'Steam',pkg:'com.valvesoftware.android.steam.community',installed:false,fav:true,provider:'ANDROID',glow:'#ff1515',status:'INSTALLED',fps:60,core:'ST',playtime:0,type:'app'},
+{id:'cod-01',title:'CALL OF DUTY MOBILE',pkg:'com.activision.callofduty.shooter',installed:true,fav:false,provider:'ANDROID',glow:'#00ff88',status:'100%',fps:120,core:'COD',playtime:89},
+{id:'genshin-01',title:'GENSHIN IMPACT',pkg:'com.miHoYo.GenshinImpact',installed:true,fav:false,provider:'ANDROID',glow:'#ff6b',status:'PLAYED',fps:60,core:'GI',playtime:156},
+{id:'roblox-01',title:'ROBLOX',pkg:'com.roblox.client',installed:false,fav:false,provider:'ANDROID',glow:'#ff0000',status:'SYNC',fps:60,core:'RB',playtime:0}
 ];
-let ACTIVE=JSON.parse(localStorage.getItem('flg_active_v5')||'null')||GAME_DB[1];
-let FILTER='ALL';
-function renderGames(){
- let list=GAME_DB;
- if(FILTER==='INSTALLED') list=list.filter(g=>g.isInstalled);
- if(FILTER==='NOT INSTALLED') list=list.filter(g=>!g.isInstalled);
- if(FILTER==='FAVORITE') list=list.filter(g=>g.favorite);
- const q=document.getElementById('searchInput').value.toLowerCase();
- if(q) list=list.filter(g=>g.title.toLowerCase().includes(q)||g.packageId.toLowerCase().includes(q));
- document.getElementById('grid').innerHTML=list.map(g=>`
- <div class="card" onclick="transform('${g.id}')">
-  <div style="height:5px;background:${g.glow}"></div>
-  <div style="padding:10px;display:flex;gap:10px"><div style="width:56px;height:56px;background:#151515;border-radius:10px;display:grid;place-items:center;font-size:26px">${g.icon}</div><div><div style="font-size:9px;border:1px solid ${g.glow};color:${g.glow};padding:2px 6px;border-radius:8px;font-weight:900">${g.status} ${g.isInstalled?'• INSTALLED':'• NOT INSTALLED'} ${g.favorite?'• ★':''}</div><div style="font-size:10px;color:#777;margin-top:3px">${g.fps} FPS • ${g.provider} • ${g.packageId}</div></div></div>
-  <div style="padding:0 10px;font-size:13px;font-weight:900">${g.title}</div>
-  <div style="padding:2px 10px;font-size:9px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${g.packageId}</div>
-  <div style="padding:8px 10px;display:flex;justify-content:space-between"><div style="background:#fff;color:#000;padding:5px 12px;border-radius:12px 0 12px 0;font-size:11px;font-weight:900;cursor:pointer" onclick="event.stopPropagation();launchApp('${g.id}')">OPEN →</div><div style="display:flex;gap:6px"><div style="width:28px;height:28px;border:1px solid ${g.glow};border-radius:50%;display:grid;place-items:center;color:${g.glow};cursor:pointer" onclick="event.stopPropagation();toggleFav('${g.id}')">${g.favorite?'★':'☆'}</div><div style="width:28px;height:28px;border:1px solid ${g.glow};border-radius:50%;display:grid;place-items:center;color:${g.glow}" onclick="event.stopPropagation();launchApp('${g.id}')">↗</div></div></div>
-  <div style="height:3px;background:${g.glow}"></div>
- </div>`).join('');
- document.getElementById('libCount').textContent=list.length;
+let currentFilter='all';let searchQuery='';
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.style.display='block';setTimeout(()=>t.style.display='none',2500);}
+function hexToRgba(hex,a){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return `rgba(${r},${g},${b},${a})`;}
+function render(list){
+const grid=document.getElementById('grid');
+if(!list.length){grid.innerHTML='<div id="empty">NO ASSETS FOUND</div>';return;}
+grid.innerHTML=list.map(g=>`
+<div class="card" style="--glow:${g.glow};--glow-alpha:${hexToRgba(g.glow,.35)}" onclick="launchGame('${g.id}')">
+<button class="fav ${g.fav?'active':''}" onclick="event.stopPropagation();toggleFav('${g.id}')">${g.fav?'★':'☆'}</button>
+<div class="card-top"><div class="icon">${g.core}</div><div class="card-info"><div class="card-title">${g.title}</div><div class="card-meta"><span>${g.provider}</span><span>•</span><span>${g.fps} FPS</span><span>•</span><span>${g.playtime}H</span></div><div style="margin-top:6px"><span class="badge badge-${g.status.toLowerCase()}">${g.status}</span> ${!g.installed?'<span class="badge">NOT INSTALLED</span>':''}</div></div></div>
+<div class="card-actions"><button class="btn btn-primary" onclick="event.stopPropagation();launchGame('${g.id}')">${g.installed?'OPEN':'INSTALL'}</button><button class="btn" onclick="event.stopPropagation();showDetails('${g.id}')">DETAILS</button></div>
+</div>`).join('');
+document.getElementById('count').textContent=list.length;
 }
-function transform(id){
- const g=GAME_DB.find(x=>x.id===id); ACTIVE=g; localStorage.setItem('flg_active_v5',JSON.stringify(g));
- document.getElementById('inner').style.borderColor=g.glow;
- document.getElementById('core').style.borderColor=g.glow; document.getElementById('core').style.boxShadow=`0 0 35px ${g.glow}`;
- document.getElementById('glow').style.background=`radial-gradient(circle,${g.glow}55 0%,transparent 70%)`;
- document.getElementById('pct').textContent=g.fps+'%'; document.getElementById('pct').style.color=g.glow;
- document.getElementById('fpsN').textContent=g.fps; document.getElementById('fpsN').style.color=g.glow;
- document.getElementById('actTitle').textContent=g.title; document.getElementById('actTitle').style.color=g.glow;
- document.getElementById('buildT').textContent=g.id.toUpperCase(); document.getElementById('buildT').style.color=g.glow;
- document.getElementById('topStatus').textContent=`${g.title.toUpperCase()} • ${g.fps}% ACTIVE • IsInstalled:${g.isInstalled} • ${g.packageId}`;
- switchPage('Reactor');
+function filterGames(type,btn){
+currentFilter=type;
+document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+if(btn)btn.classList.add('active');
+let list=games;
+if(type==='installed')list=list.filter(g=>g.installed);
+if(type==='favorite')list=list.filter(g=>g.fav);
+if(type!=='all'&&type!=='installed'&&type!=='favorite')list=list.filter(g=>g.provider===type);
+if(searchQuery)list=list.filter(g=>g.title.toLowerCase().includes(searchQuery));
+render(list);
+showToast(type.toUpperCase()+' FILTER APPLIED');
 }
-function launchApp(id){
- const g=GAME_DB.find(x=>x.id===id);
- if(!g.isInstalled){ if(confirm(`${g.title} NOT INSTALLED\n${g.packageId}\nOpen Play Store?`)){ window.open(`https://play.google.com/store/apps/details?id=${g.packageId}`,'_blank'); } return; }
- try{ window.location.href=`intent://#Intent;package=${g.packageId};action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;end`; setTimeout(()=>{ window.open(`https://play.google.com/store/search?q=${encodeURIComponent(g.title)}&c=apps`,'_blank'); },1300); }catch(e){ alert(`Launching ${g.title}`); }
+function searchGames(q){
+searchQuery=q.toLowerCase();
+let list=games;
+if(currentFilter==='installed')list=list.filter(g=>g.installed);
+if(currentFilter==='favorite')list=list.filter(g=>g.fav);
+if(currentFilter!=='all'&&currentFilter!=='installed'&&currentFilter!=='favorite')list=list.filter(g=>g.provider===currentFilter);
+if(q)list=list.filter(g=>g.title.toLowerCase().includes(q)||g.pkg.toLowerCase().includes(q));
+render(list);
 }
-function toggleFav(id){ const g=GAME_DB.find(x=>x.id===id); g.favorite=!g.favorite; renderGames(); }
-function setFilter(f){ FILTER=f; renderGames(); }
-function switchPage(n){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.querySelectorAll('.bbtn').forEach(b=>b.classList.remove('active')); document.getElementById('page'+n).classList.add('active'); document.getElementById('b'+n).classList.add('active'); }
-function resetCore(){ transform(GAME_DB[1].id); }
-function purgeCore(){ if(confirm('PURGE CORE? Clears 26 tables')){ localStorage.clear(); location.reload(); } }
-function exportDiag(){ const d={model:"FLG-RC v2.4.1",active:ACTIVE,assets:GAME_DB.length,tables:26,apis:45}; const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'}); const u=URL.createObjectURL(b); const a=document.createElement('a'); a.href=u; a.download='flg-diag.json'; a.click(); }
-function showDB(){ openModal('26 TABLES • SHEET 22',`<pre>CREATE TABLE assets (id TEXT PRIMARY KEY, title TEXT, type TEXT, source TEXT, status TEXT, favorite BOOLEAN, playtime INTEGER);
-CREATE TABLE builds (id TEXT PRIMARY KEY, asset_id TEXT, name TEXT, category TEXT, version TEXT, enabled BOOLEAN);
-CREATE TABLE metadata (id TEXT PRIMARY KEY, asset_id TEXT, data TEXT);
-CREATE TABLE providers (id TEXT PRIMARY KEY, name TEXT, status TEXT, asset_count INTEGER);
-CREATE TABLE plugins (id TEXT PRIMARY KEY, name TEXT, version TEXT, enabled BOOLEAN);
-CREATE TABLE security_events (id TEXT PRIMARY KEY, severity TEXT, event_type TEXT, description TEXT, created_at TEXT);
-CREATE TABLE privacy_consents (id TEXT PRIMARY KEY, category TEXT, status TEXT, created_at TEXT);
-CREATE TABLE security_audit (id TEXT PRIMARY KEY, user_id TEXT, action TEXT, resource TEXT, result TEXT, timestamp TEXT);
-CREATE TABLE developer_projects (id TEXT PRIMARY KEY, name TEXT, type TEXT, version TEXT);
-CREATE TABLE layouts (id TEXT PRIMARY KEY, name TEXT, device_type TEXT, theme TEXT, settings TEXT);
--- + 16 more tables: users profiles sessions collections tags themes settings workflows workflow_runs workflow_tasks recommendations insights telemetry analytics active_sessions developer_builds sdk_packages input_profiles ui_preferences privacy_exports privacy_audit</pre>`); }
-function showAPIs(){ openModal('40+ APIS • SHEET 21',`<pre>BASE /api/v1 • OpenAPI 3.1.0 • Bearer JWT
-POST /assets/launch • GET /assets • POST /library/scan • POST /builds/transform • POST /providers/sync • POST /assistant/chat • GET /security/events • POST /privacy/export • GET /telemetry/realtime • WebSockets /ws/reactor /ws/library /ws/security /ws/privacy /ws/cicd</pre>`); }
-function openModal(t,b){ document.getElementById('modalTitle').textContent=t; document.getElementById('modalBody').innerHTML=b; document.getElementById('modal').classList.add('active'); }
-function closeModal(){ document.getElementById('modal').classList.remove('active'); }
-function renderRoadmap(){ document.getElementById('roadmap').innerHTML=[{t:"FLG AI Assistant + Tagging",d:"Q4 2024 • Auto-tag",p:84,b:"BETA",c:"#ff1515"},{t:"Reactor Core v2 Skins",d:"Q1 2025 • 6 skins",p:62,b:"ALPHA",c:"#facc15"},{t:"Marketplace Economy",d:"Q1 2025 • Payouts",p:45,b:"DEV",c:"#3b82f6"}].map(r=>`<div class="box" style="border-left-color:${r.c}"><div style="float:right;background:${r.c};color:#000;padding:3px 6px;font-size:9px;font-weight:900">${r.b}</div><div style="font-size:13px;font-weight:900">${r.t}</div><div style="font-size:11px;color:#666">${r.d}</div><div style="height:4px;background:#1a1a1a;margin-top:8px"><div style="width:${r.p}%;height:100%;background:${r.c}"></div></div></div>`).join(''); }
-function renderMarket(){ document.getElementById('market').innerHTML=[{n:"CyberGrid 2077 Mod Pack",p:"FREE"},{n:"FLG Theme Engine",p:"$9.99"}].map(m=>`<div class="box"><div style="font-weight:900">${m.n}</div><div style="margin-top:6px"><span style="background:#ff1515;color:#000;padding:3px 8px;font-size:10px;font-weight:900">${m.p}</span></div></div>`).join(''); }
-function renderSec(){ document.getElementById('security').innerHTML=[{n:"Key Vault"},{n:"MFA"},{n:"Passkeys"},{n:"Rate Limiting"},{n:"GDPR"},{n:"SOC2"}].map(s=>`<div class="tile">${s.n}</div>`).join(''); }
-function renderAI(){ document.getElementById('aiProviders').innerHTML=[{n:"Azure OpenAI"},{n:"Anthropic"},{n:"Google AI"},{n:"Local Models"}].map(a=>`<div class="box"><div style="font-weight:900">${a.n}</div></div>`).join(''); }
-function runCmd(c){ document.getElementById('cmdOut').textContent=`> ${c}\n✓ Manifest Valid\n✓ Package created`; }
-function privacyAction(a){ openModal(a,`${a}<br>GDPR CCPA SOC2`); }
-function triggerCI(){ openModal('CI PIPELINE','ci.yml build.yml security.yml'); }
-renderGames(); renderRoadmap(); renderMarket(); renderSec(); renderAI();
-if(ACTIVE) transform(ACTIVE.id);
+function toggleFav(id){
+const g=games.find(x=>x.id===id);
+g.fav=!g.fav;renderFiltered();showToast(g.fav?g.title+' ADDED TO FAVORITES':g.title+' REMOVED');
+}
+function renderFiltered(){searchGames(searchQuery);}
+function launchGame(id){
+const g=games.find(x=>x.id===id);
+if(!g)return;
+if(window.Android&&window.Android.launchApp){window.Android.launchApp(g.pkg);showToast('LAUNCHING '+g.title+' -> '+g.pkg);}
+else{if(g.installed)showToast('ANDROID LAUNCH: '+g.pkg+' (Would launch via PackageManager.getLaunchIntentForPackage)');else{showToast('OPENING STORE: '+g.pkg);window.open('https://play.google.com/store/apps/details?id='+g.pkg,'_blank');}}
+}
+function showDetails(id){
+const g=games.find(x=>x.id===id);
+showToast(`${g.title} | PKG: ${g.pkg} | ${g.fps} FPS | ${g.status} | Installed: ${g.installed} | Provider: ${g.provider} | Glow: ${g.glow}`);
+}
+document.addEventListener('keydown',e=>{if(e.key==='/'){e.preventDefault();document.getElementById('search').focus();}});
+render(games);
 </script>
 </body>
 </html>
