@@ -1,18 +1,31 @@
 <!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>
-body{background:#000;color:#fff;font-family:sans-serif;margin:0}body::before{content:'';position:fixed;inset:0;background:radial-gradient(800px 500px at 50% 0%, rgba(255,21,21,0.2), transparent)}
-.top{padding:16px 18px;display:flex;justify-content:space-between;border-bottom:1px solid #1a1a1a;position:sticky;top:0;background:#000;z-index:10}
-h1{font-size:26px;font-weight:900}h1 span{color:#ff1515;text-shadow:0 0 20px #ff1515}
-.sub{color:#ff1515;font-size:14px;letter-spacing:3px;font-weight:800} .build{color:#555;font-size:12px;letter-spacing:3px}
-.dot{width:12px;height:12px;background:#ff1515;border-radius:50%;display:inline-block;box-shadow:0 0 12px #ff1515}
-.rings{width:420px;height:420px;margin:40px auto;position:relative;display:flex;align-items:center;justify-content:center}
-.ring{position:absolute;border-radius:50%;border:1px solid #222}.ring:nth-child(1){inset:0;border-color:#ff151520} .ring:nth-child(2){inset:30px;border-style:dashed} .ring:nth-child(3){inset:60px} .core{width:180px;height:180px;background:radial-gradient(circle at 30% 25%, #ff7a7a, #ff1515 45%, #8a0000);border-radius:40px;display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;color:#000;box-shadow:0 0 80px #ff1515,0 0 160px #ff151544;z-index:2}
-.motto{text-align:center;margin-top:40px} .motto h2{font-size:26px;letter-spacing:3px} .motto p{color:#ff1515;letter-spacing:7px;font-size:16px;font-weight:800;margin-top:12px}
-.tabs{position:fixed;bottom:16px;left:12px;right:12px;display:flex;gap:8px;background:#0c0c0ce6;border:1px solid #1e1e1e;border-radius:24px;padding:6px}
-.tab{flex:1;padding:18px;border-radius:18px;background:transparent;border:none;color:#666;font-weight:800} .tab.on{background:#ff1515;color:#000;box-shadow:0 8px 32px #ff151588}
+body{background:#000;color:#fff;margin:0;font-family:sans-serif}
+.top{padding:20px 18px;background:#000;border-bottom:1px solid #222;position:sticky;top:0;z-index:10}
+h1{font-size:36px!important;font-weight:900;letter-spacing:1px}h1 span{color:#ff1515;text-shadow:0 0 30px #ff1515}
+.sub{color:#ff1515;font-size:18px!important;letter-spacing:4px;font-weight:900;margin-top:6px} .build{color:#777;font-size:14px!important;letter-spacing:3px;margin-top:6px}
+.bar{padding:14px;text-align:center;border-bottom:1px solid #111;font-size:16px;letter-spacing:2px}
+.bar span:last-child{color:#ff4444;border:1px solid #ff151566;padding:8px 18px;border-radius:30px;margin-left:16px;font-weight:800}
+.rings{width:520px;height:520px;margin:30px auto 10px;position:relative;display:flex;align-items:center;justify-content:center}
+.ring{position:absolute;border-radius:50%;border:2px solid #222}.ring:first-child{inset:0;border-color:#ff151544} .ring:nth-child(2){inset:40px;border-style:dashed}
+.core{width:240px!important;height:240px!important;background:radial-gradient(circle at 30% 25%, #ff9a9a, #ff1515 45%, #7a0000);border-radius:50px;display:flex;align-items:center;justify-content:center;font-size:88px!important;font-weight:900;color:#000;box-shadow:0 0 100px #ff1515,0 0 200px #ff151566;z-index:2}
+.motto{text-align:center;padding:20px} .motto h2{font-size:34px!important;letter-spacing:3px;font-weight:900} .motto p{color:#ff1515;font-size:22px!important;letter-spacing:10px;font-weight:900;margin-top:16px;text-shadow:0 0 20px #ff1515}
+.live{margin:30px auto;border:2px solid #222;border-radius:100px;padding:14px 28px;display:inline-flex;gap:12px;font-size:18px!important;color:#888}
+.dot{width:14px;height:14px;background:#ff1515;border-radius:50%;box-shadow:0 0 14px #ff1515;display:inline-block}
+.tabs{position:fixed;bottom:18px;left:12px;right:12px;display:flex;gap:10px;background:#0c0c0cf2;border:1px solid #222;border-radius:28px;padding:8px;z-index:20}
+.tab{flex:1;padding:22px;border-radius:20px;background:transparent;border:none;color:#666;font-weight:900;font-size:14px;letter-spacing:2px} .tab.on{background:#ff1515;color:#000;font-size:16px;box-shadow:0 10px 40px #ff1515aa}
+.page{display:none}.page.on{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px 14px 120px} .card{background:#111;border:1px solid #222;border-radius:20px;padding:20px;text-align:center}
+.card b{font-size:18px} .card div{font-size:14px}
 </style></head><body>
-<div class="top"><div><h1>FACTORY LINE <span>GAMING</span></h1><div class="sub">THAT OPTIMIZE. PERFORMANCE.</div><div class="build">FACTORY RED • BUILD 4.2.0</div></div><div>CPU TEMP 54°C <span class="dot"></span></div></div>
-<div style="text-align:center;padding:12px 0;border-bottom:1px solid #111;display:flex;justify-content:center;gap:20px;font-size:13px;letter-spacing:2px"><span>REACTOR: <b>ONLINE</b></span><span style="color:#ff4444;border:1px solid #ff151544;padding:6px 14px;border-radius:20px">LOAD 42% • FACTORY RED</span></div>
-<div class="rings"><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="core">FL</div></div>
-<div class="motto"><h2>WE DON'T GUESS. WE ENGINEER.</h2><p>CORE-X</p><div style="margin:30px auto;border:1px solid #222;border-radius:100px;padding:12px 24px;display:inline-flex;gap:10px;font-size:14px;letter-spacing:2px;color:#888"><b style="color:#fff">54°C</b> CPU TEMP • LIVE <span class="dot"></span></div></div>
-<div class="tabs"><div class="tab">LIBRARY</div><div class="tab on">REACTOR</div><div class="tab">BUILDS</div></div>
-</body></html>
+<div class="top"><div><h1>FACTORY LINE <span>GAMING</span></h1><div class="sub">THAT OPTIMIZE. PERFORMANCE.</div><div class="build">FACTORY RED • BUILD 4.2.0 — CPU TEMP 54°C <span class="dot"></span></div></div></div>
+<div class="bar">REACTOR: <b>ONLINE</b> <span>LOAD 42% • FACTORY RED</span></div>
+<div id="p-reactor" class="page on"><div class="rings"><div class="ring"></div><div class="ring"></div><div class="core">FL</div></div><div class="motto"><h2>WE DON'T GUESS. WE ENGINEER.</h2><p>CORE-X</p><div class="live"><b style="color:#fff">54°C</b> CPU TEMP • LIVE <span class="dot"></span></div></div></div>
+<div id="p-library" class="page"><div style="text-align:center;padding:30px 18px"><h1 style="font-size:48px">FL-CORE<br>LIBRARY</h1><p style="color:#666;margin:14px 0 20px;font-size:18px">300+ Builds • Tap to Launch</p></div><div class="grid" id="grid"></div></div>
+<div id="p-builds" class="page"><div style="text-align:center;padding:30px"><h1>BUILDS</h1></div><div class="grid"><div class="card" style="background:#ff1515;color:#000"><b>Factory Red 4.2.0 ACTIVE</b></div><div class="card"><b>PS5 TRACE</b></div><div class="card"><b>Switch Hybrid</b></div><div class="card"><b>Neon Cyberpunk</b></div></div></div>
+<div class="tabs"><button class="tab" id="t-lib" onclick="show('library')">LIBRARY</button><button class="tab on" id="t-re" onclick="show('reactor')">REACTOR</button><button class="tab" id="t-bui" onclick="show('builds')">BUILDS</button></div>
+<script>
+function show(p){document.querySelectorAll('.page').forEach(e=>e.classList.remove('on'));document.getElementById('p-'+p).classList.add('on');document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));document.getElementById('t-'+(p=='reactor'?'re':p=='library'?'lib':'bui')).classList.add('on');if(p=='library')render();}
+let lib=[];let names=["God of War","Gran Turismo","GTA","Tekken","DBZ","Monster Hunter","Zelda","Smash","Pokemon","Mario"];for(let i=0;i<312;i++){lib.push({t:`FL ${names[i%names.length]} #${i}`,s:["PSP","PS2","GC","GBA"][i%4]})}
+function render(){document.getElementById('grid').innerHTML=lib.slice(0,100).map(g=>`<div class=card onclick="alert('${g.t}')"><div style='font-size:40px'>🎮</div><b>${g.t}</b><div style='color:#ff4444;margin-top:6px'>● LIVE</div><div style='color:#666'>${g.s}</div></div>`).join('')}
+render();
+</script></body></html>
