@@ -2,79 +2,193 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FLG Reactor - Library 312</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>FLG REACTOR - FACTORY LABS CORE</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
-  *{margin:0;padding:0;box-sizing:border-box;font-family:'JetBrains Mono',monospace}
-  body{background:#000;color:#fff;min-height:100vh;padding-bottom:90px}
-  .header{padding:16px 16px 12px;display:flex;justify-content:space-between;align-items:center}
-  .title{font-size:18px;font-weight:800;letter-spacing:1px}
-  .toggles{display:flex;gap:8px}
-  .toggle{padding:6px 16px;border-radius:16px;font-size:11px;font-weight:800}
-  .toggle.grid{background:#fff;color:#000}
-  .toggle.compact{background:#111;color:#888;border:1px solid #222}
-  .search{margin:0 16px 12px;background:#0a0a0a;border:1px solid #222;border-radius:20px;padding:12px 16px;display:flex;gap:10px;align-items:center}
-  .search input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:11px;letter-spacing:1px}
-  .grid-lib{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 8px}
-  .card{background:#0a0a0a;border:1px solid #151515;border-radius:12px;overflow:hidden;cursor:pointer;position:relative}
-  .card:active{transform:scale(0.97)}
-  .card-top{height:6px;width:100%}
-  .card-body{padding:12px 12px 0;display:flex;gap:10px}
-  .card-icon{width:64px;height:64px;background:#111;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:36px}
-  .badge{border:1px solid var(--glow);padding:2px 8px;border-radius:10px;font-size:9px;font-weight:800;color:var(--glow);background:#1a1a1a;display:inline-block}
-  .fps{color:#666;font-size:10px;margin-top:4px}
-  .card-title{padding:10px 12px 0;font-size:13px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .card-pkg{padding:2px 12px 0;font-size:9px;color:#555;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .card-foot{padding:10px;display:flex;justify-content:space-between;align-items:center}
-  .open-btn{background:#fff;color:#000;padding:6px 16px;border-radius:16px 0 16px 0;font-size:11px;font-weight:800}
-  .arrow{width:28px;height:28px;border:1px solid var(--glow);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--glow);font-size:12px}
-  .card-glow{height:2px;opacity:0.6;margin:0 12px}
-  .hint{text-align:center;color:#666;font-size:9px;letter-spacing:1px;margin-top:12px}
-  .nav{position:fixed;bottom:0;left:0;right:0;background:#000;padding:8px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;border-top:1px solid #111}
-  .nav-btn{background:#0a0a0a;border:1px solid #222;border-radius:20px;padding:10px;text-align:center}
-  .nav-btn.active{background:#fff}
-  .nav-btn.active div{color:#000!important;font-weight:800}
-  .nav-t{font-size:11px;color:#888}
-  .nav-s{font-size:8px;color:#555;margin-top:2px}
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;font-family:'JetBrains Mono',monospace}
+:root{--glow:#ff1515;--bg:#000;--card:#0a0a0a;--border:#1a1a1a}
+body{background:var(--bg);color:#fff;overflow-x:hidden}
+.top{padding:20px 16px;display:flex;gap:14px;border-bottom:2px solid #111}
+.fl{font-size:48px;font-weight:900;color:#333;line-height:1}
+.factory{font-size:18px;letter-spacing:3px;color:#888;font-weight:800}
+.status{font-size:14px;color:var(--glow);letter-spacing:1px;margin-top:2px}
+.tabs{display:flex;gap:10px;padding:12px 16px}
+.tab{padding:10px 18px;border-radius:8px;border:1.5px solid #222;font-size:14px;font-weight:800}
+.tab.active{background:var(--glow);color:#000;border-color:var(--glow)}
+.page{display:none}
+.page.active{display:block}
+/* ===== MASSIVE REACTOR CORE ENGINE ===== */
+.reactor-header{padding:16px;display:flex;justify-content:space-between}
+.core-label{font-size:12px;color:#666;letter-spacing:2px}
+.reactor-big{font-size:36px;font-weight:900;line-height:1}
+.build-row{margin-top:10px;display:flex;gap:8px;font-size:14px}
+.build-id{color:var(--glow);font-weight:800}
+.flux-box{text-align:right}
+.flux-l{font-size:10px;color:#666}
+.flux-v{font-size:18px;color:var(--glow);font-weight:900}
+.online{display:inline-block;margin-top:8px;background:var(--glow);color:#000;padding:6px 14px;font-weight:900;letter-spacing:2px}
+.core-stage{position:relative;height:460px;display:flex;align-items:center;justify-content:center;margin:10px 0}
+.glow{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(255,21,21,0.3) 0%,transparent 70%);border-radius:50%}
+.ring-outer{position:absolute;width:280px;height:280px;border:4px solid var(--glow);border-radius:50%;background:#000;box-shadow:0 0 30px var(--glow);transition:0.4s}
+.ring-dash{position:absolute;width:220px;height:220px;border:2px dashed var(--glow);border-radius:50%;opacity:0.6;animation:spin 12s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring-inner{position:absolute;width:140px;height:140px;border:3px solid var(--glow);background:#1a0000;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:0.4s}
+.core-fl{font-size:52px;font-weight:900;color:var(--glow)}
+.core-word{font-size:12px;color:#fff;font-weight:800}
+.core-pct{font-size:11px;color:var(--glow);font-weight:800}
+.panel{position:absolute;background:#0e0e0e;border:1.5px solid #331111;padding:12px;min-width:110px;border-radius:4px}
+.p-label{font-size:9px;color:#666;letter-spacing:1px}
+.p-val{font-size:20px;font-weight:900}
+.p-val.red{color:var(--glow)} .p-val.white{color:#fff}
+.p-sub{font-size:9px;color:#555;margin-top:2px}
+.p1{top:10px;left:8px} .p2{top:60px;right:8px} .p3{bottom:50px;left:8px} .p4{bottom:10px;right:8px}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;padding:0 12px 10px}
+.stat{background:#0e0e0e;border:1.5px solid #222;padding:12px;border-radius:6px}
+.s-label{font-size:10px;color:#666} .s-val{font-size:14px;color:#fff;margin-top:4px;font-weight:800}
+/* ===== MASSIVE LIBRARY ENGINE ===== */
+.lib-head{padding:18px 16px;display:flex;justify-content:space-between;align-items:center}
+.lib-title{font-size:22px;font-weight:900}
+.toggles{display:flex;gap:8px}
+.t{padding:8px 18px;border-radius:20px;font-size:13px;font-weight:900}
+.t.grid{background:#fff;color:#000} .t.compact{background:#111;color:#888;border:1px solid #222}
+.search{margin:0 12px 14px;background:#0e0e0e;border:1.5px solid #222;border-radius:24px;padding:14px 18px;display:flex;gap:12px;align-items:center}
+.search input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:15px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 10px}
+.card{background:#0e0e0e;border:1.5px solid #222;border-radius:14px;overflow:hidden;cursor:pointer;transition:0.15s}
+.card:active{transform:scale(0.96);border-color:var(--glow)}
+.card-top{height:8px}
+.card-mid{padding:14px 14px 0;display:flex;gap:12px}
+.icon{width:72px;height:72px;background:#151515;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.badge{border:1.5px solid var(--glow);padding:4px 10px;border-radius:12px;font-size:11px;font-weight:900;color:var(--glow);background:#1a1a1a;display:inline-block}
+.fps{font-size:12px;color:#777;margin-top:6px;font-weight:700}
+.c-title{padding:12px 14px 0;font-size:15px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c-pkg{padding:4px 14px 0;font-size:11px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.c-foot{padding:12px;display:flex;justify-content:space-between;align-items:center}
+.open{background:#fff;color:#000;padding:8px 18px;border-radius:18px 0 18px 0;font-size:13px;font-weight:900;cursor:pointer}
+.arrow{width:32px;height:32px;border:1.5px solid var(--glow);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--glow);font-weight:900}
+.c-glow{height:3px;opacity:0.8}
+.hint{text-align:center;color:#777;font-size:12px;letter-spacing:1px;padding:14px 0 100px;font-weight:700}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#000;padding:10px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;border-top:2px solid #151515;z-index:99}
+.b-btn{background:#111;border:1.5px solid #222;border-radius:24px;padding:14px;text-align:center;cursor:pointer}
+.b-btn.active{background:#fff;border-color:#fff}
+.b-btn.active div{color:#000!important}
+.b-btn.reactor.active{background:var(--glow);border-color:var(--glow)}
+.b-t{font-size:14px;font-weight:900;color:#888} .b-s{font-size:10px;color:#555;margin-top:2px;font-weight:700}
 </style>
 </head>
 <body>
-<div class="header"><div class="title">LIBRARY • 312</div><div class="toggles"><div class="toggle grid">GRID</div><div class="toggle compact">COMPACT</div></div></div>
-<div class="search"><span style="color:#555">⌕</span><input id="search" placeholder="SEARCH BUILDS, STATUS, FPS..." oninput="filterGames()"></div>
-<div class="grid-lib" id="grid"></div>
-<div class="hint">TAP CARD TO TRANSFORM • OPEN TO LAUNCH</div>
-<div class="nav"><div class="nav-btn" onclick="location.href='index.html'"><div class="nav-t">REACTOR</div><div class="nav-s">CORE-01</div></div><div class="nav-btn active"><div class="nav-t">LIBRARY</div><div class="nav-s">208 • 312</div></div><div class="nav-btn"><div class="nav-t">BUILDS</div><div class="nav-s">6 SKINS</div></div></div>
-<script>
-const games=[
- {title:"PALWORLD",pkg:"com.factoryline.palworld",icon:"🎮",color:"#a855f7",status:"100%",fps:120},
- {title:"ELDEN RING",pkg:"com.factoryline.eldenring",icon:"👾",color:"#facc15",status:"PLAYED",fps:97},
- {title:"CYBERPUNK 2077",pkg:"com.factoryline.cyberpunk",icon:"🚀",color:"#06b6d4",status:"NEW",fps:134},
- {title:"FORTNITE",pkg:"com.factoryline.fortnite",icon:"🏹",color:"#f97316",status:"SYNC",fps:231},
- {title:"FORZA HORIZON 5",pkg:"Xbox/Forza5",icon:"🏁",color:"#f97316",status:"INSTALLED",fps:144},
- {title:"WITCHER 3",pkg:"GOG/Witcher3",icon:"🐺",color:"#444",status:"INSTALLED",fps:120},
- {title:"DIABLO IV",pkg:"Bnet/Diablo4",icon:"😈",color:"#991b1b",status:"INSTALLED",fps:160},
- {title:"ASSASSINS CREED",pkg:"Ubisoft/AC",icon:"🗡️",color:"#1e3a8a",status:"INSTALLED",fps:90},
- {title:"FIFA 25",pkg:"EA/FC25",icon:"⚽",color:"#00ff88",status:"INSTALLED",fps:144},
- {title:"NEW WORLD",pkg:"Amazon/NewWorld",icon:"🌲",color:"#f59e0b",status:"INSTALLED",fps:110},
-];
-function render(list){
- document.getElementById('grid').innerHTML = list.map(g=>`
- <div class="card" style="--glow:${g.color}" onclick="transform('${g.title}')">
-  <div class="card-top" style="background:${g.color}"></div>
-  <div class="card-body">
-   <div class="card-icon">${g.icon}</div>
-   <div><div class="badge" style="border-color:${g.color};color:${g.color}">${g.status}</div><div class="fps">${g.fps} FPS</div></div>
+<div class="top"><div class="fl">FL</div><div><div class="factory">FACTORY LABS</div><div class="status" id="topStatus">PATH OF EXILE • ACTIVE...</div></div></div>
+<div class="tabs"><div class="tab active" id="tabReactor" onclick="switchPage('reactor')">REACTOR</div><div class="tab" id="tabLibrary" onclick="switchPage('library')">LIBRARY • 312</div><div class="tab" onclick="alert('BUILDS: 6 skins - tap Library card to transform')">BUILDS</div></div>
+
+<!-- REACTOR PAGE - MASSIVE CORE STRUCTURE -->
+<div id="pageReactor" class="page active">
+  <div class="reactor-header"><div><div class="core-label">CORE UNIT // 01</div><div class="reactor-big">REACTOR</div><div class="reactor-big">CORE</div><div class="build-row"><span style="color:#666">BUILD:</span><span class="build-id" id="buildId">NEUTRAL-01</span><span style="color:#888">• TRANSFORM ACTIVE</span></div></div><div class="flux-box"><div class="flux-l">FLUX CAPACITOR</div><div class="flux-v">98.4% SYNC</div><div class="online">ONLINE</div></div></div>
+  <div class="core-stage"><div class="glow" id="glow"></div><div class="ring-outer" id="ringOuter"></div><div class="ring-dash" id="ringDash"></div><div class="ring-inner" id="ringInner"><div class="core-fl" id="coreFL">FL</div><div class="core-word">CORE</div><div class="core-pct" id="corePct">164% ACTIVE</div></div>
+    <div class="panel p1"><div class="p-label">CORE TEMP</div><div class="p-val red">54°C</div><div class="p-sub">NOMINAL</div></div>
+    <div class="panel p2"><div class="p-label">CPU LOAD</div><div class="p-val white" id="cpuT">68%</div><div style="height:6px;background:#222;margin-top:6px;border-radius:3px"><div id="cpuB" style="height:100%;width:68%;background:var(--glow)"></div></div></div>
+    <div class="panel p3"><div class="p-label">FLUX</div><div class="p-val white">STABLE</div><div style="color:var(--glow);font-size:14px;margin-top:2px">▐▐▐▌</div></div>
+    <div class="panel p4"><div class="p-label">BUILD</div><div class="p-val red" id="buildCard" style="font-size:12px">NEUTRAL-01</div><div class="p-sub">CLICK LIBRARY TO TRANSFORM</div></div>
   </div>
-  <div class="card-title">${g.title}</div>
-  <div class="card-pkg">${g.pkg}</div>
-  <div class="card-foot"><div class="open-btn">OPEN →</div><div class="arrow" style="border-color:${g.color};color:${g.color}">↗</div></div>
-  <div class="card-glow" style="background:${g.color}"></div>
+  <div class="stats"><div class="stat"><div class="s-label">POWER DRAW</div><div class="s-val">2.4 kW</div></div><div class="stat"><div class="s-label">MEM USAGE</div><div class="s-val">12.8 / 32 GB</div></div><div class="stat"><div class="s-label">NET LATENCY</div><div class="s-val">14 ms</div></div></div>
+  <div class="hint">TAP LIBRARY • PICK BUILD TO TRANSFORM CORE ENGINE</div>
+</div>
+
+<!-- LIBRARY PAGE - MASSIVE GAME REGISTRY -->
+<div id="pageLibrary" class="page">
+  <div class="lib-head"><div class="lib-title">LIBRARY • 312</div><div class="toggles"><div class="t grid">GRID</div><div class="t compact">COMPACT</div></div></div>
+  <div class="search"><span style="color:#555;font-size:18px">⌕</span><input id="searchInput" placeholder="SEARCH BUILDS, STATUS, FPS..." oninput="filterGames()"></div>
+  <div class="grid2" id="grid"></div>
+  <div class="hint">TAP CARD TO TRANSFORM REACTOR • OPEN BUTTON LAUNCHES</div>
+</div>
+
+<div class="bottom">
+  <div class="b-btn reactor active" id="navReactor" onclick="switchPage('reactor')"><div class="b-t">REACTOR</div><div class="b-s" id="navSub">CORE-01</div></div>
+  <div class="b-btn" id="navLibrary" onclick="switchPage('library')"><div class="b-t">LIBRARY</div><div class="b-s">208 • 312</div></div>
+  <div class="b-btn" onclick="switchPage('library')"><div class="b-t">BUILDS</div><div class="b-s">6 SKINS</div></div>
+</div>
+
+<script>
+// ===== MASSIVE FLG REACTOR ENGINE - CORE REGISTRY =====
+const GAME_REGISTRY=[
+ {id:"palworld-01",title:"PALWORLD",pkg:"com.factoryline.palworld",provider:"FactoryLine",icon:"🎮",color:"#a855f7",status:"100%",fps:120,coreText:"PL",temp:"62°C",cpu:"84%"},
+ {id:"eldenring-01",title:"ELDEN RING",pkg:"com.factoryline.eldenring",provider:"FactoryLine",icon:"👾",color:"#facc15",status:"PLAYED",fps:97,coreText:"ER",temp:"71°C",cpu:"92%"},
+ {id:"cyberpunk-01",title:"CYBERPUNK 2077",pkg:"com.factoryline.cyberpunk",provider:"FactoryLine",icon:"🚀",color:"#06b6d4",status:"NEW",fps:134,coreText:"CP",temp:"68°C",cpu:"88%"},
+ {id:"fortnite-01",title:"FORTNITE",pkg:"com.factoryline.fortnite",provider:"FactoryLine",icon:"🏹",color:"#f97316",status:"SYNC",fps:231,coreText:"FN",temp:"55°C",cpu:"76%"},
+ {id:"forza5-01",title:"FORZA HORIZON 5",pkg:"Xbox/Forza5",provider:"Xbox",icon:"🏁",color:"#f97316",status:"INSTALLED",fps:144,coreText:"FH",temp:"59°C",cpu:"81%"},
+ {id:"witcher3-01",title:"WITCHER 3",pkg:"GOG/Witcher3",provider:"GOG",icon:"🐺",color:"#666",status:"INSTALLED",fps:120,coreText:"W3",temp:"64°C",cpu:"79%"},
+ {id:"diablo4-01",title:"DIABLO IV",pkg:"Bnet/Diablo4",provider:"Battle.net",icon:"😈",color:"#991b1b",status:"INSTALLED",fps:160,coreText:"D4",temp:"70°C",cpu:"85%"},
+ {id:"ac-01",title:"ASSASSINS CREED",pkg:"Ubisoft/AC",provider:"Ubisoft",icon:"🗡️",color:"#1e3a8a",status:"INSTALLED",fps:90,coreText:"AC",temp:"61°C",cpu:"77%"},
+ {id:"fifa25-01",title:"FIFA 25",pkg:"EA/FC25",provider:"EA App",icon:"⚽",color:"#00ff88",status:"INSTALLED",fps:144,coreText:"FC",temp:"52°C",cpu:"69%"},
+ {id:"newworld-01",title:"NEW WORLD",pkg:"Amazon/NewWorld",provider:"Amazon",icon:"🌲",color:"#f59e0b",status:"INSTALLED",fps:110,coreText:"NW",temp:"58°C",cpu:"73%"},
+ {id:"discord-01",title:"Discord",pkg:"com.discord",provider:"ANDROID",icon:"💬",color:"#5865F2",status:"INSTALLED",fps:60,coreText:"DC",temp:"48°C",cpu:"45%"},
+ {id:"steam-01",title:"Steam",pkg:"com.valvesoftware.android.steam.community",provider:"ANDROID",icon:"🔥",color:"#ff1515",status:"INSTALLED",fps:60,coreText:"ST",temp:"51°C",cpu:"50%"},
+];
+let ACTIVE_BUILD={id:"NEUTRAL-01",color:"#ff1515",icon:"FL",coreText:"FL",fps:164,temp:"54°C",cpu:"68%"};
+
+function RENDER_GAMES(list=GAME_REGISTRY){
+ document.getElementById('grid').innerHTML=list.map(g=>`
+ <div class="card" style="--glow:${g.color}" onclick="TRANSFORM_CORE('${g.id}')">
+  <div class="card-top" style="background:${g.color}"></div>
+  <div class="card-mid">
+   <div class="icon">${g.icon}</div>
+   <div style="flex:1"><div class="badge" style="border-color:${g.color};color:${g.color}">${g.status}</div><div class="fps">${g.fps} FPS • ${g.provider}</div></div>
+  </div>
+  <div class="c-title">${g.title}</div>
+  <div class="c-pkg">${g.pkg}</div>
+  <div class="c-foot"><div class="open" onclick="event.stopPropagation();LAUNCH_GAME('${g.id}')">OPEN →</div><div class="arrow" style="border-color:${g.color};color:${g.color}">↗</div></div>
+  <div class="c-glow" style="background:${g.color}"></div>
  </div>`).join('');
 }
-function filterGames(){const q=document.getElementById('search').value.toLowerCase();render(games.filter(g=>g.title.toLowerCase().includes(q)||g.status.toLowerCase().includes(q)))}
-function transform(t){alert(t+" → TRANSFORM CORE // Reactor will turn "+t+" color "+t+"-01");localStorage.setItem('activeBuild',t);location.href='index.html';}
-render(games);
+
+function TRANSFORM_CORE(gameId){
+ const g=GAME_REGISTRY.find(x=>x.id===gameId); if(!g) return;
+ ACTIVE_BUILD=g;
+ document.documentElement.style.setProperty('--glow',g.color);
+ document.getElementById('ringOuter').style.borderColor=g.color;
+ document.getElementById('ringOuter').style.boxShadow=`0 0 35px ${g.color}`;
+ document.getElementById('ringInner').style.borderColor=g.color;
+ document.getElementById('ringDash').style.borderColor=g.color;
+ document.getElementById('coreFL').textContent=g.coreText;
+ document.getElementById('coreFL').style.color=g.color;
+ document.getElementById('corePct').textContent=`${g.fps}% ACTIVE`;
+ document.getElementById('corePct').style.color=g.color;
+ document.getElementById('buildId').textContent=g.id.toUpperCase();
+ document.getElementById('buildId').style.color=g.color;
+ document.getElementById('buildCard').textContent=g.id.toUpperCase();
+ document.getElementById('buildCard').style.color=g.color;
+ document.getElementById('topStatus').textContent=`${g.title.toUpperCase()} • ACTIVE...`;
+ document.getElementById('navSub').textContent=g.title.substring(0,8).toUpperCase();
+ document.getElementById('cpuT').textContent=g.cpu;
+ document.getElementById('cpuB').style.width=g.cpu;
+ document.getElementById('cpuB').style.background=g.color;
+ localStorage.setItem('flg_active',gameId);
+ switchPage('reactor');
+}
+
+function LAUNCH_GAME(id){
+ const g=GAME_REGISTRY.find(x=>x.id===id);
+ alert(`🚀 LAUNCHING ${g.title}\nPackage: ${g.pkg}\nProvider: ${g.provider}\n\nOn Android this would open the app.\nOn this web demo, it transforms the Reactor Core to ${g.title} colors.\n\nTapping the CARD transforms, tapping OPEN launches.`);
+ TRANSFORM_CORE(id);
+}
+
+function filterGames(){
+ const q=document.getElementById('searchInput').value.toLowerCase();
+ RENDER_GAMES(GAME_REGISTRY.filter(g=>g.title.toLowerCase().includes(q)||g.status.toLowerCase().includes(q)||g.provider.toLowerCase().includes(q)));
+}
+
+function switchPage(page){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.querySelectorAll('.tabs .tab').forEach(t=>t.classList.remove('active'));
+ document.querySelectorAll('.bottom .b-btn').forEach(b=>b.classList.remove('active'));
+ if(page==='reactor'){document.getElementById('pageReactor').classList.add('active');document.getElementById('tabReactor').classList.add('active');document.getElementById('navReactor').classList.add('active');}
+ else{document.getElementById('pageLibrary').classList.add('active');document.getElementById('tabLibrary').classList.add('active');document.getElementById('navLibrary').classList.add('active');}
+ window.scrollTo(0,0);
+}
+
+// RESTORE LAST BUILD
+const saved=localStorage.getItem('flg_active'); if(saved){ const g=GAME_REGISTRY.find(x=>x.id===saved); if(g){ setTimeout(()=>TRANSFORM_CORE(saved),100); }}
+RENDER_GAMES();
 </script>
 </body>
 </html>
