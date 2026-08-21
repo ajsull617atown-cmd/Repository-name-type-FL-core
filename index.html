@@ -1,46 +1,578 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>FLG - 312 COLORED CARDS - FINAL LARGE BLUEPRINT</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{width:100%;min-height:100vh;min-height:100dvh;background:#000;color:#fff;font-family:'JetBrains Mono',monospace;-webkit-text-size-adjust:100%;font-size:16px;overflow-x:hidden}
-.orbitron{font-family:'Orbitron',monospace}
-.top-bar{height:52px;background:#000;border-bottom:2px solid #ff1a1a;display:flex;align-items:center;justify-content:space-between;padding:0 14px;position:sticky;top:0;z-index:50}
-.clock{font-weight:900;color:#ff1a1a;font-size:15px}
-.reactor-hero{position:relative;width:100%;background:radial-gradient(ellipse at center,#1a0a0a 0%,#000 70%);display:flex;flex-direction:column;align-items:center;padding:12px 0 6px}
-.reactor-img-wrap{position:relative;width:92vw;max-width:420px;aspect-ratio:1;margin:0 auto;cursor:pointer;border-radius:50%;overflow:hidden;box-shadow:0 0 90px rgba(255,26,26,.55)}
-.reactor-img-wrap img{width:100%;height:100%;object-fit:contain}
-.diag-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px;width:100%;max-width:480px;margin:0 auto}
-.diag-card{background:#0a0a0a;border:2px solid #ff1a1a;border-radius:18px;padding:16px;cursor:pointer}
-.filters{display:flex;gap:8px;padding:12px;overflow-x:auto;position:sticky;top:52px;z-index:40;background:#000;border-bottom:1px solid #1a1a1a}
-.pill{flex:0 0 auto;height:38px;padding:0 16px;border-radius:999px;border:1px solid #2a2a2a;background:#111;font-size:11px;cursor:pointer;white-space:nowrap;display:flex;align-items:center;font-weight:700}
-.pill.active{background:#fff;color:#000}
-.search-wrap{padding:12px;display:flex;gap:10px;position:sticky;top:52px;z-index:39;background:#000}
-.search-wrap input{flex:1;height:48px;background:#111;border:1.5px solid #222;border-radius:14px;padding:0 14px;color:#fff;font-size:14px}
-.search-wrap select{height:48px;background:#111;border:1.5px solid #222;border-radius:14px;padding:0 12px;color:#fff}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 12px 12px}
-@media(min-width:600px){.grid{grid-template-columns:repeat(3,1fr)}}@media(min-width:900px){.grid{grid-template-columns:repeat(4,1fr)}}@media(min-width:1200px){.grid{grid-template-columns:repeat(5,1fr)}}
-.card{height:172px;border-radius:14px;border-left:4px solid;cursor:pointer;transition:.16s;display:flex;flex-direction:column;padding:14px;background:linear-gradient(135deg,var(--bg),var(--bg2));box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),0 4px 16px rgba(0,0,0,.6)}
-.card:active{transform:scale(.96)}.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.7),0 0 18px var(--color)}
-.card-letter{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.15)}
-.card-title{font-size:12.5px;font-weight:900;margin-top:10px;min-height:45px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.card-cat{font-size:9px;opacity:.65;margin-top:auto;letter-spacing:1px;text-transform:uppercase;font-weight:700}
-.launch-overlay{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.92);backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:22px}
-.launch-box{width:100%;max-width:440px;background:#0e0e0e;border:1.5px solid #222;border-radius:26px;padding:24px;text-align:center}
-.progress{height:8px;background:#1a1a1a;border-radius:999px;overflow:hidden;margin-top:16px}.progress-fill{height:100%;background:linear-gradient(90deg,var(--color),#fff);transition:width .12s}
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:72px;background:#000;border-top:2px solid #ff1a1a;display:flex;z-index:60;padding:8px 10px;gap:8px}
-.bn{flex:1;border-radius:999px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;cursor:pointer;border:1px solid #1e1e1e;background:#111;font-weight:700}
-.bn.active{background:#fff;color:#000;font-weight:900}.bn small{font-size:9px;opacity:.7}
-.recent{display:flex;gap:10px;padding:10px 12px;overflow-x:auto}.recent-item{flex:0 0 auto;width:72px;height:72px;border-radius:14px;border:1.5px solid #222;display:flex;align-items:center;justify-content:center;font-size:9.5px;text-align:center;padding:6px;cursor:pointer;font-weight:800}
-.toast-wrap{position:fixed;top:62px;right:10px;z-index:90;display:flex;flex-direction:column;gap:8px;pointer-events:none}.toast{background:#151515;border:1px solid #2a2a2a;border-radius:999px;padding:10px 16px;font-size:12px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Line OS X</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');
+
+        :root {
+            --bg-color: #050505;
+            --panel-bg: rgba(15, 0, 0, 0.85);
+            --border-red: #a80000;
+            --accent-red: #ff0000;
+            --glow-red: 0 0 10px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(255, 0, 0, 0.2);
+            --text-main: #e0e0e0;
+            --text-muted: #777;
+            --font-main: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at center, #1a0000 0%, #050505 70%);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Horizontal Layout Orientation Workspace */
+        .flg-workspace {
+            width: 95vw;
+            height: 90vh;
+            display: grid;
+            grid-template-columns: 240px 1fr 280px;
+            grid-template-rows: 60px 1fr 180px 40px;
+            gap: 15px;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #330000;
+            border-radius: 12px;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
+        }
+
+        /* Shared Panel Styles */
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-red);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: var(--glow-red);
+            position: relative;
+        }
+
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        /* Top Header */
+        .header {
+            grid-column: 1 / 4;
+            grid-row: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: none;
+            box-shadow: none;
+            background: transparent;
+            padding: 0;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-text h1 { margin: 0; font-size: 20px; color: var(--accent-red); font-weight: 700; letter-spacing: 2px;}
+        .logo-text p { margin: 0; font-size: 12px; color: var(--text-muted); letter-spacing: 1px;}
+        
+        .header-center { text-align: center; }
+        .header-center h2 { margin: 0; font-size: 24px; letter-spacing: 4px; }
+        .header-center p { margin: 0; font-size: 10px; color: var(--text-muted); letter-spacing: 2px; }
+
+        .time-area { text-align: right; }
+        .time-area h3 { margin: 0; font-size: 22px; color: var(--accent-red); }
+        .time-area p { margin: 0; font-size: 12px; color: var(--text-muted); }
+
+        /* Left Sidebar: Main Operations */
+        .sidebar-left {
+            grid-column: 1;
+            grid-row: 2 / 4;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border-red);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255, 0, 0, 0.2);
+            border-left: 4px solid var(--accent-red);
+            box-shadow: inset 10px 0 20px rgba(255, 0, 0, 0.1);
+        }
+
+        /* Center Dashboard Core */
+        .center-core {
+            grid-column: 2;
+            grid-row: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+
+        .reactor-core {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 4px solid var(--border-red);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.4), inset 0 0 50px rgba(255, 0, 0, 0.4);
+            position: relative;
+            animation: pulse 4s infinite alternate;
+        }
+
+        .reactor-core h1 {
+            font-size: 48px;
+            margin: 0;
+            color: var(--accent-red);
+            text-shadow: 0 0 10px var(--accent-red);
+        }
+
+        .reactor-core p {
+            margin: 0;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.3), inset 0 0 40px rgba(255, 0, 0, 0.3); }
+            100% { box-shadow: 0 0 80px rgba(255, 0, 0, 0.6), inset 0 0 80px rgba(255, 0, 0, 0.6); }
+        }
+
+        /* Featured Game Card */
+        .featured-game {
+            width: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(139,0,0,0.5));
+            border: 1px solid var(--border-red);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        .featured-info h3 { margin: 0; font-size: 20px; letter-spacing: 2px;}
+        .featured-info p { margin: 0; font-size: 12px; color: var(--text-muted);}
+
+        .launch-btn {
+            background: var(--accent-red);
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            transition: transform 0.2s;
+        }
+
+        .launch-btn:hover { transform: scale(1.05); }
+
+        /* Right Sidebar: Command Intelligence */
+        .sidebar-right {
+            grid-column: 3;
+            grid-row: 2 / 4;
+        }
+
+        .status-bar {
+            margin-bottom: 15px;
+        }
+
+        .status-bar label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 6px;
+            background: #222;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent-red);
+            box-shadow: 0 0 10px var(--accent-red);
+        }
+
+        /* Horizontal Game Projection Line */
+        .game-carousel {
+            grid-column: 2;
+            grid-row: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .carousel-track::-webkit-scrollbar { height: 4px; }
+        .carousel-track::-webkit-scrollbar-thumb { background: var(--border-red); }
+
+        .game-card {
+            min-width: 120px;
+            height: 160px;
+            background: #111;
+            border: 1px solid var(--border-red);
+            border-radius: 6px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .game-card.active {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .game-card span {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px #000;
+            z-index: 2;
+        }
+
+        /* Bottom Status Bar */
+        .bottom-bar {
+            grid-column: 1 / 4;
+            grid-row: 4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-red);
+            padding-top: 10px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .metric { display: flex; gap: 20px; color: var(--text-muted); }
+        .metric span { color: var(--text-main); font-weight: 600; }
+    </style>
 </head>
 <body>
-<div class="top-bar">
-<div style="display:flex;gap:10px;align-items:center"><div style="width:36px;height:36px;border-radius:50%;background:#000;border:2.5px solid #ff1a1a;display:flex;align-items:center;justify-content:center;color:#ff1a1a;font-weight:900;font-family:Orbitron;font-size:14px">FL</div><span class="orbitron" style="letter-spacing:3px;font-size:13px;font-weight:900">FACTORY LABS</span></div>
-<div class="clock" id="clock">00:00:00</div>
-<div style="font-size:10px;
+
+    <div class="flg-workspace">
+        
+        <!-- TOP HEADER -->
+        <div class="header">
+            <div class="logo-area">
+                <div style="width: 40px; height: 40px; background: var(--accent-red); display:flex; justify-content:center; align-items:center; font-weight:bold; font-size: 24px; border-radius:4px;">FL</div>
+                <div class="logo-text">
+                    <h1>FACTORYLINE</h1>
+                    <p>GAMING</p>
+                </div>
+            </div>
+            <div class="header-center">
+                <h2>FACTORYLINE OS X</h2>
+                <p>NEXUS VISUAL GAMING PLATFORM</p>
+            </div>
+            <div class="time-area">
+                <h3 id="clock">11:54 PM</h3>
+                <p id="date">MAY 25, 2026</p>
+            </div>
+        </div>
+
+        <!-- LEFT SIDEBAR -->
+        <div class="sidebar-left panel">
+            <div class="section-title">Main Operations</div>
+            <div class="nav-item active">⌂ HOME</div>
+            <div class="nav-item">⊞ GAME GRID</div>
+            <div class="nav-item">⚙ APPLICATIONS</div>
+            <div class="nav-item">📁 PROJECTS</div>
+            <div class="nav-item">💬 COMMS HUB</div>
+            <div class="nav-item">🧠 AI NEXUS</div>
+            <div class="nav-item">▶ MEDIA CENTER</div>
+            <div class="nav-item">⚡ SYSTEM CORE</div>
+        </div>
+
+        <!-- CENTER CORE DASHBOARD -->
+        <div class="center-core">
+            <!-- Top stats of center core -->
+            <div style="display: flex; width: 100%; justify-content: space-around; margin-bottom: 20px;">
+                <div class="panel" style="padding: 10px; text-align: center;">CPU<br><span style="color:var(--accent-red);font-size:18px;">50%</span></div>
+                <div class="panel" style="padding: 10px; text-align: center;">RAM<br><span style="color:var(--accent-red);font-size:18px;">32G</span></div>
+                <div class="panel" style="padding: 10px; text-align: center;">GPU<br><span style="color:var(--accent-red);font-size:18px;">64%</span></div>
+            </div>
+
+            <!-- Main Reactor Visual -->
+            <div class="reactor-core">
+                <h1>FL</h1>
+                <p>FACTORY CORE</p>
+                <div style="position:absolute; bottom: 20px; font-size:10px; color: var(--accent-red);">SYSTEM ONLINE</div>
+            </div>
+
+            <!-- Featured Launch Card -->
+            <div class="featured-game">
+                <div class="featured-info">
+                    <h3>ELDEN RING</h3>
+                    <p>SHADOW OF THE ERDTREE</p>
+                </div>
+                <button class="launch-btn">LAUNCH GAME</button>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDEBAR -->
+        <div class="sidebar-right panel">
+            <div class="section-title">Command Intelligence</div>
+            
+            <div class="status-bar">
+                <label><span>ACTIVE DIRECTORIES</span> <span>87%</span></label>
+                <div class="progress-track"><div class="progress-fill" style="width: 87%;"></div></div>
+            </div>
+            <div class="status-bar">
+                <label><span>FRAME RATE</span> <span>99%</span></label>
+                <div class="progress-track"><div class="progress-fill" style="width: 99%;"></div></div>
+            </div>
+            <div class="status-bar">
+                <label><span>NEXUS SUBMEGABYTE</span> <span>55%</span></label>
+                <div class="progress-track"><div class="progress-fill" style="width: 55%;"></div></div>
+            </div>
+            <div class="status-bar">
+                <label><span>THEME DEVELOPMENT</span> <span>90%</span></label>
+                <div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div>
+            </div>
+            <div class="status-bar">
+                <label><span>ANALYTICS FLUX RATE</span> <span>45%</span></label>
+                <div class="progress-track"><div class="progress-fill" style="width: 45%;"></div></div>
+            </div>
+
+            <div class="section-title" style="margin-top: 30px;">Comms Hub</div>
+            <div style="display:flex; justify-content:space-between; font-size: 12px; margin-bottom:10px;">
+                <span>Discord</span> <span style="color:var(--accent-red);">1 New</span>
+            </div>
+        </div>
+
+        <!-- BOTTOM GAME CAROUSEL -->
+        <div class="game-carousel panel">
+            <div class="section-title">Game Projection Line</div>
+            <div class="carousel-track">
+                <div class="game-card"><span>WUKONG</span></div>
+                <div class="game-card active"><span>ELDEN RING</span></div>
+                <div class="game-card"><span>DOOM</span></div>
+                <div class="game-card"><span>WITCHER</span></div>
+                <div class="game-card"><span>FORZA</span></div>
+                <div class="game-card"><span>GOD OF WAR</span></div>
+                <div class="game-card"><span>CYBERPUNK</span></div>
+            </div>
+        </div>
+
+        <!-- BOTTOM METRICS BAR -->
+        <div class="bottom-bar">
+            <div class="metric">
+                <div>UPTIME: <span>18:20:5m:5s</span></div>
+                <div>NETWORK: <span>125 Mbps / 24 Mbps</span></div>
+            </div>
+            <div class="metric">
+                <div style="text-align: center;">FACTORY CORE TEMPERATURE<br><span style="color:var(--accent-red); font-size:18px;">54°C</span></div>
+            </div>
+            <div class="metric">
+                <div>STORAGE: <span>2TB / 4TB</span></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Real-time Clock Script -->
+    <script>
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('clock').innerText = hours + ':' + minutes + ' ' + ampm;
+            
+            const options = { month: 'short', day: 'numeric', year: 'numeric' };
+            document.getElementById('date').innerText = now.toLocaleDateString('en-US', options).toUpperCase();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factory Line OS X</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');
+
+        :root {
+            --bg-color: #050505;
+            --panel-bg: rgba(15, 0, 0, 0.85);
+            --border-red: #a80000;
+            --accent-red: #ff0000;
+            --glow-red: 0 0 10px rgba(255, 0, 0, 0.6), inset 0 0 10px rgba(255, 0, 0, 0.2);
+            --text-main: #e0e0e0;
+            --text-muted: #777;
+            --font-main: 'Rajdhani', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at center, #1a0000 0%, #050505 70%);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Horizontal Layout Orientation Workspace */
+        .flg-workspace {
+            width: 95vw;
+            height: 90vh;
+            display: grid;
+            grid-template-columns: 240px 1fr 280px;
+            grid-template-rows: 60px 1fr 180px 40px;
+            gap: 15px;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #330000;
+            border-radius: 12px;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
+        }
+
+        /* Shared Panel Styles */
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-red);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: var(--glow-red);
+            position: relative;
+        }
+
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        /* Top Header */
+        .header {
+            grid-column: 1 / 4;
+            grid-row: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: none;
+            box-shadow: none;
+            background: transparent;
+            padding: 0;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-text h1 { margin: 0; font-size: 20px; color: var(--accent-red); font-weight: 700; letter-spacing: 2px;}
+        .logo-text p { margin: 0; font-size: 12px; color: var(--text-muted); letter-spacing: 1px;}
+        
+        .header-center { text-align: center; }
+        .header-center h2 { margin: 0; font-size: 24px; letter-spacing: 4px; }
+        .header-center p { margin: 0; font-size: 10px; color: var(--text-muted); letter-spacing: 2px; }
+
+        .time-area { text-align: right; }
+        .time-area h3 { margin: 0; font-size: 22px; color: var(--accent-red); }
+        .time-area p { margin: 0; font-size: 12px; color: var(--text-muted); }
+
+        /* Left Sidebar: Main Operations */
+        .sidebar-left {
+            grid-column: 1;
+            grid-row: 2 / 4;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section-title {
+            font-size: 12px;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border-red);
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .nav-item {
+            display: flex;
+            ali
