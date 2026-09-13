@@ -39,4 +39,4 @@ st xmlns:android="http://schemas.android.com/apk/res/android"
             <meta-data android:name="android.appwidget.provider" android:resource="@xml/reactor_widget_info" />
         </receiver>
     </application>
-</manifest>
+</manifest>q
