@@ -1,42 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<manife
-st xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.factorylabs.reactor">
+package com.factorylabs.reactor
 
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
+import android.content.SharedPreferences
 
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent>
-    </queries>
+class ReactorApplication : Application() {
 
-    <application android:name=".ReactorApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="FLG Reactor"
-        android:theme="@android:style/Theme.Black.NoTitleBar">
+    companion object {
+        const val PREFS_NAME = "reactor_prefs"
+        const val KEY_DARK_MODE = "dark_mode"
+    }
 
-        <activity android:name=".MainActivity" android:exported="true" android:launchMode="singleTop">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    override fun onCreate() {
+        super.onCreate()
+        // Theme switcher - loads saved preference
+        val prefs: SharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        val isDarkMode = prefs.getBoolean(KEY_DARK_MODE, true)
+        if (isDarkMode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
 
-        <provider android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false" android:grantUriPermissions="true">
-            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths" />
-        </provider>
-
-        <receiver android:name=".ReactorWidget" android:exported="false">
-            <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE" /></intent-filter>
-            <meta-data android:name="android.appwidget.provider" android:resource="@xml/reactor_widget_info" />
-        </receiver>
-    </application>
-</manifest>q
+    fun setTheme(isDark: Boolean) {
+        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        prefs.edit().putBoolean(KEY_DARK_MODE, isDark).apply()
+        if (isDark) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
+}
